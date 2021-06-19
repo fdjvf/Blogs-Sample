@@ -8,13 +8,10 @@ namespace Blogs.Core.Model
 {
     public partial class BlogsContext : DbContext
     {
-        public BlogsContext()
-        {
-        }
-
         public BlogsContext(DbContextOptions<BlogsContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Comment> Comments { get; set; }
