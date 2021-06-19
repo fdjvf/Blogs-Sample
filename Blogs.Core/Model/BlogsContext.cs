@@ -42,7 +42,8 @@ namespace Blogs.Core.Model
             {
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.Email).IsRequired().HasMaxLength(100); ;
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.HasIndex(e => e.Email).IsUnique();
 
                 entity.Property(e => e.Password).IsRequired().HasMaxLength(256);
 
@@ -70,6 +71,7 @@ namespace Blogs.Core.Model
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.HasIndex(e => e.Name).IsUnique();
 
                 //seed the database with sample roles
                 entity.HasData(new Role[]{
