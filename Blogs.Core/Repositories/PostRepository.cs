@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Blogs.Data.Repositories
 {
-    public class PostRepostiroy : BaseRepository<BlogsContext>, IPostRepository
+    public class PostRepository : BaseRepository<BlogsContext>, IPostRepository
     {
-        public PostRepostiroy(BlogsContext blogsContext) : base(blogsContext)
+        public PostRepository(BlogsContext blogsContext) : base(blogsContext)
         {
 
         }

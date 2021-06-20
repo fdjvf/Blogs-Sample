@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,31 +24,16 @@ namespace Blogs.Data.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=tcp:zemoga.database.windows.net,1433;Initial Catalog=Blogs;Persist Security Info=False;User ID=fvides;Password=tZFH6AAj2T;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
-
-            modelBuilder.Entity<User>(entity =>
+            #region Seed methods
+            User[] SeedUsers()
             {
-                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
-
-                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
-                entity.HasIndex(e => e.Email).IsUnique();
-
-                entity.Property(e => e.Password).IsRequired().HasMaxLength(256);
-
-                //seed the database with sample users
-                entity.HasData(
-                        new User[]
-                        {
+                return new User[]
+                         {
                             new User
                             {
                                 Id = new Guid("93DA2D99-6E0A-4AFE-A039-BA290F10CAC1"),
@@ -60,18 +46,12 @@ namespace Blogs.Data.Model
                                 Email = "writer@sample.com",
                                 Password = "1234",
                             }
-                        });
-            });
+                         };
+            }
 
-            modelBuilder.Entity<Role>(entity =>
+            Role[] SeedRoles()
             {
-                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
-
-                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
-                entity.HasIndex(e => e.Name).IsUnique();
-
-                //seed the database with sample roles
-                entity.HasData(new Role[]{
+                return new Role[]{
                     new Role
                     {
                         Id=new Guid("1D696EB7-147E-4570-AF78-AB6F57770E60"),
@@ -83,7 +63,116 @@ namespace Blogs.Data.Model
                         Id=new Guid("C8BBC75B-B16F-4CD8-AA8E-42EE8ED9B184"),
                         Name="Editor"
                     }
-                });
+                };
+            }
+
+            AuthToken[] SeedAuthTokens()
+            {
+                return new AuthToken[]
+                {
+                    new AuthToken
+                    {
+                      //We add an auth token for the Editor User
+                      Id=Guid.NewGuid(),
+                      ExpirationDate=DateTime.Now.AddMonths(3),
+                      Token="skzUF6rtAW",
+                      UserId=new Guid("93DA2D99-6E0A-4AFE-A039-BA290F10CAC1")
+                    }
+                };
+            }
+
+            Status[] SeedStatus()
+            {
+                return Enum.GetValues(typeof(PostStatus))
+                     .Cast<PostStatus>()
+                     .Select(status => new Status
+                     {
+                         Id = status,
+                         Name = status.ToString()
+                     }).ToArray();
+            }
+
+            IEnumerable<Post> SeedPosts()
+            {
+                var writerId = new Guid("E720064A-0EF2-4070-A9BE-39DB075BD485");
+                var allPosts = new List<Post>();
+
+                //Create some Approve posts
+                for (int i = 1; i <= 2; i++)
+                {
+                    allPosts.Add(new Post
+                    {
+                        ApprovalDate = DateTime.Now.AddDays(-2),
+                        Id = Guid.NewGuid(),
+                        StatusId = PostStatus.Approved,
+                        Title = $"Post Title {i}",
+                        WriterId = writerId,
+                        Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. 
+                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. 
+                            Donec mollis accumsan neque ac pharetra"
+                    });
+                }
+
+                //Create some pending posts
+                for (int i = 1; i <= 4; i++)
+                {
+                    allPosts.Add(new Post
+                    {
+                        ApprovalDate = DateTime.Now,
+                        Id = Guid.NewGuid(),
+                        StatusId = PostStatus.PendingApproval,
+                        Title = $"Post Pending Title {i}",
+                        WriterId = writerId,
+                        Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. 
+                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. 
+                            Donec mollis accumsan neque ac pharetra"
+                    });
+                }
+
+                //Create some rejected posts
+                for (int i = 1; i <= 3; i++)
+                {
+                    allPosts.Add(new Post
+                    {
+                        ApprovalDate = DateTime.Now,
+                        Id = Guid.NewGuid(),
+                        StatusId = PostStatus.Rejected,
+                        Title = $"Post Rejected Title {i}",
+                        WriterId = writerId,
+                        Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. 
+                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. 
+                            Donec mollis accumsan neque ac pharetra"
+                    });
+                }
+
+                return allPosts;
+            }
+            #endregion
+
+            //Model configurations
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.HasIndex(e => e.Email).IsUnique();
+
+                entity.Property(e => e.Password).IsRequired().HasMaxLength(256);
+
+                //seed the database with sample users
+                entity.HasData(SeedUsers());
+            });
+
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.HasIndex(e => e.Name).IsUnique();
+
+                //seed the database with sample roles
+                entity.HasData(SeedRoles());
 
             });
 
@@ -100,7 +189,6 @@ namespace Blogs.Data.Model
                 },//User with Writer Role
             });
 
-
             //Add some tokens
             modelBuilder.Entity<AuthToken>(entity =>
             {
@@ -114,19 +202,8 @@ namespace Blogs.Data.Model
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AuthToken_User");
 
-                entity.HasData(new AuthToken[]
-                {
-                    new AuthToken
-                    {
-                      //We add an auth token for the Editor User
-                      Id=Guid.NewGuid(),
-                      ExpirationDate=DateTime.Now.AddMonths(3),
-                      Token="skzUF6rtAW",
-                      UserId=new Guid("93DA2D99-6E0A-4AFE-A039-BA290F10CAC1")
-                    }
-                });
+                entity.HasData(SeedAuthTokens());
             });
-
 
             modelBuilder.Entity<Comment>(entity =>
             {
@@ -168,6 +245,8 @@ namespace Blogs.Data.Model
                    .HasForeignKey(d => d.WriterId)
                    .OnDelete(DeleteBehavior.ClientSetNull)
                    .HasConstraintName("FK_Posts_User");
+
+                entity.HasData(SeedPosts());
             });
 
             modelBuilder.Entity<Status>(entity =>
@@ -180,15 +259,7 @@ namespace Blogs.Data.Model
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.HasData(
-                    Enum.GetValues(typeof(PostStatus))
-                    .Cast<PostStatus>()
-                    .Select(status => new Status
-                    {
-                        Id = status,
-                        Name = status.ToString()
-                    }
-                    ));
+                entity.HasData(SeedStatus());
             });
 
             OnModelCreatingPartial(modelBuilder);
