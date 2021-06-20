@@ -1,4 +1,5 @@
 ﻿using Blogs.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -19,7 +20,8 @@ namespace Blogs.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Authorize(Roles = "Editor")]
+        public IActionResult PendingStuff()
         {
             return View();
         }
@@ -29,5 +31,11 @@ namespace Blogs.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
     }
 }

@@ -1,6 +1,11 @@
-using Blogs.Core.Model;
+using Blogs.Data.Abstract;
+using Blogs.Data.Model;
+using Blogs.Data.Repositories;
+using Blogs.Services;
+using Blogs.Services.Abstract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +28,17 @@ namespace Blogs.Web
             services.AddDbContextPool<BlogsContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("BlogsDb")));
 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
+
+            services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/Home/AccessDenied";
+                });
+
             services.AddControllersWithViews();
         }
 
@@ -44,6 +60,7 @@ namespace Blogs.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
