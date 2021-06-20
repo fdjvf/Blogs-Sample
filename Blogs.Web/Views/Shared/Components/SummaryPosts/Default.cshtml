@@ -9,9 +9,12 @@
             </a>
             <p class="card-text">@post.ShortDescription</p>
         </div>
-        <div class="card-footer text-muted">
-            @post.CreatedOn.ToShortDateString()
-        </div>
+        @if (post.PublishedOn.HasValue)
+        {
+            <div class="card-footer text-muted">
+                @post.PublishedOn?.ToShortDateString()
+            </div>
+        }
     </div>
     <br />
 }

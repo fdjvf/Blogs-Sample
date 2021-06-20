@@ -2,6 +2,7 @@
 using Blogs.Data.Abstract;
 using Blogs.Data.Model;
 using Blogs.Services.Abstract;
+using Blogs.Services.Dto;
 using Blogs.Services.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,11 +31,20 @@ namespace Blogs.Services
             return result;
         }
 
-        public async Task<IEnumerable<SummaryPostViewModel>> GetPendingPosts()
+        public async Task<IEnumerable<SummaryPostViewModel>> GetPendingPostsByUser(UserObject user)
         {
-            var publicPosts = await PostRepository.GetPostsByStatus(PostStatus.PendingApproval);
+            var pendingPosts = await PostRepository.GetPostsByStatus(PostStatus.PendingApproval);
 
-            var result = Mapper.Map<IEnumerable<SummaryPostViewModel>>(publicPosts);
+            if (user.Roles.Contains("Writer"))
+            {
+                pendingPosts = pendingPosts.Where(post => post.WriterId == user.Id);
+            }
+            else if (!user.Roles.Contains("Editor"))//If the user is neither a Writer or a Editor, return empty list
+            {
+                pendingPosts = new List<Post>();
+            }
+
+            var result = Mapper.Map<IEnumerable<SummaryPostViewModel>>(pendingPosts);
 
             return result;
         }
@@ -46,6 +56,16 @@ namespace Blogs.Services
             var result = Mapper.Map<IEnumerable<SummaryPostViewModel>>(publicPosts);
 
             return result;
+        }
+
+        public async Task SavePost(PostViewModel postView, Guid writerId)
+        {
+            await PostRepository.SavePost(postView.Content, postView.Title, writerId);
+        }
+
+        public Task UpdatePost(PostViewModel postView)
+        {
+            throw new NotImplementedException();
         }
     }
 }

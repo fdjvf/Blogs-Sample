@@ -1,12 +1,14 @@
 ﻿using Blogs.Data.Model;
 using Blogs.Services.Abstract;
+using Blogs.Services.Utilities;
+using Blogs.Services.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace Blogs.Web.Controllers
 {
+    [Authorize(Roles = "Writer")]
     public class PostsController : Controller
     {
         private IPostService PostService { get; }
@@ -15,32 +17,47 @@ namespace Blogs.Web.Controllers
             PostService = postService;
         }
 
-        [Authorize(Roles = "Writer")]
+
+        [Route("[controller]/Approved")]
         public async Task<IActionResult> ApprovedPosts()
         {
-            var myPosts = await PostService.GetPostsByWriterIdAndStatus(Guid.Parse(User.FindFirst("Id").Value), PostStatus.Approved);
+            var myPosts = await PostService.GetPostsByWriterIdAndStatus(User.GetId(), PostStatus.Approved);
             return View(myPosts);
         }
 
-        [Authorize(Roles = "Writer")]
+        [Route("[controller]/Rejected")]
         public async Task<IActionResult> RejectedPosts()
         {
-            var myPosts = await PostService.GetPostsByWriterIdAndStatus(Guid.Parse(User.FindFirst("Id").Value), PostStatus.Rejected);
+            var myPosts = await PostService.GetPostsByWriterIdAndStatus(User.GetId(), PostStatus.Rejected);
             return View(myPosts);
         }
-        [Authorize(Roles = "Editor")]
+
+        [Authorize]
+        [Authorize(Roles = "Writer,Editor")]
+        [Route("[controller]/Pending")]
         public async Task<IActionResult> PendingPosts()
         {
-            var pendingPosts = await PostService.GetPendingPosts();
+            var pendingPosts = await PostService.GetPendingPostsByUser(User.ToUserObject());
             return View(pendingPosts);
         }
 
-
-        [Authorize(Roles = "Writer")]
+        [Route("[controller]/Add")]
         public IActionResult CreatePost()
         {
-            return View();
+            return View("AddPost");
         }
 
+        [HttpPost]
+        [Route("[controller]/Add")]
+        public async Task<IActionResult> CreatePost(PostViewModel postView)
+        {
+            if (ModelState.IsValid)
+            {
+                await PostService.SavePost(postView, User.GetId());
+                return RedirectToAction("Pending");
+            }
+
+            return View("AddPost", postView);
+        }
     }
 }

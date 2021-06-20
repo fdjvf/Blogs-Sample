@@ -6,7 +6,7 @@ namespace Blogs.Services.ViewModels
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime? PublishedOn { get; set; }
 
         private string _ShortDescription;
         public string ShortDescription
@@ -17,7 +17,8 @@ namespace Blogs.Services.ViewModels
             }
             set
             {
-                _ShortDescription = value.Substring(0, 150) + "...";
+                int maxLength = value.Length > 150 ? 150 : value.Length;
+                _ShortDescription = value.Substring(0, maxLength) + "...";
             }
         }
 

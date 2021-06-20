@@ -26,7 +26,7 @@ namespace Blogs.Data.Abstract
         /// <param name="text"></param>
         /// <param name="writerId"></param>
         /// <returns></returns>
-        Task SavePost(string text, Guid writerId);
+        Task SavePost(string text,string title ,Guid writerId);
 
         /// <summary>
         /// Apply update to a post

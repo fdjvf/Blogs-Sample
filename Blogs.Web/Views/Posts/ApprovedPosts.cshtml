@@ -3,6 +3,13 @@
     ViewData["Title"] = "Approved Posts";
 }
 
-<h4>All published posts by me</h4>
-
+@if (Model.Count == 0)
+{
+    <h4>Go Create something amazing.</h4>
+}
+else
+{
+    <h4>All posts published  by me</h4>
+}
+<br />
 <vc:summary-posts posts="@Model"></vc:summary-posts>

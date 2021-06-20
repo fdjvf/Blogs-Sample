@@ -17,22 +17,24 @@ namespace Blogs.Data.Repositories
 
         public async Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status)
         {
-            var posts = await Db.Posts.Where(post => post.StatusId == status && !post.IsDeleted).ToListAsync();
+            var posts = await Db.Posts.Where(post => post.StatusId == status && !post.IsDeleted).OrderBy(post => post.Title).ToListAsync();
             return posts;
         }
 
         public async Task<IEnumerable<Post>> GetPostsByWriterId(Guid writerId)
         {
-            var posts = await Db.Posts.Where(post => post.WriterId == writerId && !post.IsDeleted).ToListAsync();
+            var posts = await Db.Posts.Where(post => post.WriterId == writerId && !post.IsDeleted).OrderBy(post => post.Title).ToListAsync();
             return posts;
         }
 
-        public async Task SavePost(string text, Guid writerId)
+        public async Task SavePost(string text, string title, Guid writerId)
         {
             var newPost = new Post
             {
                 Text = text,
-                WriterId = writerId
+                WriterId = writerId,
+                StatusId = PostStatus.PendingApproval,
+                Title = title
             };
             Db.Posts.Add(newPost);
             await Db.SaveChangesAsync();

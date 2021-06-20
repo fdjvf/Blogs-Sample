@@ -29,24 +29,28 @@
                         }
                         else
                         {
-                            if (User.IsInRole("Writer"))
+                            if (User.IsWriter())
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="ApprovedPosts">Approved Posts</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Approved">Approved Posts</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="RejectedPosts">Rejected Posts</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Pending">Pending Posts</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="CreatePost">Create new post</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Rejected">Rejected Posts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Add">Create new post</a>
                                 </li>
                             }
-                            if (User.IsInRole("Editor"))
+                            else if (User.IsEditor())
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="PendingPosts">Pending Posts</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Pending">Pending Posts</a>
                                 </li>
                             }
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
                             </li>
