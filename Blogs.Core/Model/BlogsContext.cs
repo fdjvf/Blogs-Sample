@@ -155,6 +155,8 @@ namespace Blogs.Data.Model
 
                 entity.Property(e => e.Text).IsRequired();
 
+                entity.Property(e => e.Title).IsRequired().HasMaxLength(50);
+
                 entity.HasOne(d => d.Status)
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.StatusId)

@@ -4,14 +4,16 @@ using Blogs.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blogs.Data.Migrations
 {
     [DbContext(typeof(BlogsContext))]
-    partial class BlogsContextModelSnapshot : ModelSnapshot
+    [Migration("20210620151311_AddedTitletoPosts")]
+    partial class AddedTitletoPosts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
