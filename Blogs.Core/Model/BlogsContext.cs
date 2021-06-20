@@ -45,6 +45,12 @@ namespace Blogs.Data.Model
                                 Id = new Guid("E720064A-0EF2-4070-A9BE-39DB075BD485"),
                                 Email = "writer@sample.com",
                                 Password = "1234",
+                            },
+                            new User
+                            {
+                                Id = new Guid("6DD192B3-FA1F-46B1-BC91-DBDBF8CD40CE"),
+                                Email = "writer2@sample.com",
+                                Password = "1234",
                             }
                          };
             }
@@ -118,7 +124,6 @@ namespace Blogs.Data.Model
                 {
                     allPosts.Add(new Post
                     {
-                        ApprovalDate = DateTime.Now,
                         Id = Guid.NewGuid(),
                         StatusId = PostStatus.PendingApproval,
                         Title = $"Post Pending Title {i}",
@@ -134,7 +139,6 @@ namespace Blogs.Data.Model
                 {
                     allPosts.Add(new Post
                     {
-                        ApprovalDate = DateTime.Now,
                         Id = Guid.NewGuid(),
                         StatusId = PostStatus.Rejected,
                         Title = $"Post Rejected Title {i}",
@@ -187,6 +191,10 @@ namespace Blogs.Data.Model
                     RolesId=new Guid("1D696EB7-147E-4570-AF78-AB6F57770E60"),
                     UsersId=new Guid("E720064A-0EF2-4070-A9BE-39DB075BD485")
                 },//User with Writer Role
+                new {
+                    RolesId=new Guid("1D696EB7-147E-4570-AF78-AB6F57770E60"),
+                    UsersId=new Guid("6DD192B3-FA1F-46B1-BC91-DBDBF8CD40CE")
+                }
             });
 
             //Add some tokens
