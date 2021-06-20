@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace Blogs.Core.Model
+namespace Blogs.Data.Model
 {
     public partial class BlogsContext : DbContext
     {

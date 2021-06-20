@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Blogs.Core.Model
+namespace Blogs.Data.Model
 {
     public enum PostStatus
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Blogs.Core.Model
+namespace Blogs.Data.Model
 {
     public class User
     {

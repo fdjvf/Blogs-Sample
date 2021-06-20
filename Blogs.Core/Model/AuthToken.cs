@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blogs.Core.Model
+namespace Blogs.Data.Model
 {
     /// <summary>
     /// Auth tokens use to authenticate through the API

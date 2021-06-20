@@ -1,12 +1,12 @@
-﻿using Blogs.Core.Abstract;
-using Blogs.Core.Model;
+﻿using Blogs.Data.Abstract;
+using Blogs.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blogs.Core.Repositories
+namespace Blogs.Data.Repositories
 {
     public class PostRepostiroy : BaseRepository<BlogsContext>, IPostRepository
     {

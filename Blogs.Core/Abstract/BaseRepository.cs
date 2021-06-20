@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Blogs.Core.Abstract
+namespace Blogs.Data.Abstract
 {
     public abstract class BaseRepository<T>
         where T : DbContext
