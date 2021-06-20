@@ -1,0 +1,8 @@
+﻿@model List<SummaryPostViewModel>
+@{
+    ViewData["Title"] = "Pending Posts";
+}
+
+<h4>Approve the following posts to make them public.</h4>
+
+<vc:summary-posts posts="@Model"></vc:summary-posts>

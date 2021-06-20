@@ -1,0 +1,17 @@
+﻿@model IEnumerable<SummaryPostViewModel>
+
+@foreach (var post in Model)
+{
+    <div class="card">
+        <div class="card-body">
+            <a href="#">
+                <h5 class="card-title">@post.Title</h5>
+            </a>
+            <p class="card-text">@post.ShortDescription</p>
+        </div>
+        <div class="card-footer text-muted">
+            @post.CreatedOn.ToShortDateString()
+        </div>
+    </div>
+    <br />
+}

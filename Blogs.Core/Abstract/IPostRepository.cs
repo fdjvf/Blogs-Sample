@@ -12,13 +12,13 @@ namespace Blogs.Data.Abstract
         /// </summary>
         /// <param name="writerId"></param>
         /// <returns></returns>
-        Task<List<Post>> GetPostsByWriterId(Guid writerId);
+        Task<IEnumerable<Post>> GetPostsByWriterId(Guid writerId);
 
         /// <summary>
         /// Get posts by status
         /// </summary>
         /// <returns></returns>
-        Task<List<Post>> GetPendingPostsByStatus(PostStatus status);
+        Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status);
 
         /// <summary>
         /// Create new post

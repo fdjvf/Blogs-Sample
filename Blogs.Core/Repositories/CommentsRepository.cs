@@ -15,7 +15,7 @@ namespace Blogs.Data.Repositories
 
         }
 
-        public async Task<List<Comment>> GetCommentsByPostId(Guid postId)
+        public async Task<IEnumerable<Comment>> GetCommentsByPostId(Guid postId)
         {
             var result = await Db.Comments.Where(comment => comment.PostId == postId && !comment.IsDeleted).ToListAsync();
             return result;

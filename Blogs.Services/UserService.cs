@@ -1,6 +1,7 @@
-﻿using Blogs.Data.Abstract;
-using Blogs.Data.Model;
+﻿using AutoMapper;
+using Blogs.Data.Abstract;
 using Blogs.Services.Abstract;
+using Blogs.Services.Dto;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,23 +11,26 @@ namespace Blogs.Services
     public class UserService : IUserService
     {
         private IUserRepository UserRepository { get; }
+        private IMapper Mapper { get; }
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             UserRepository = userRepository;
+            Mapper = mapper;
         }
 
-        public ClaimsPrincipal GetUserIdentity(User user,string authType)
+        public ClaimsPrincipal GetUserIdentity(UserObject user, string authType)
         {
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name,user.Email),
-                new Claim(ClaimTypes.Email,user.Email)
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim("Id",user.Id.ToString())
             };
 
             foreach (var role in user.Roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             var mainIdentity = new ClaimsIdentity(claims, authType);
@@ -36,13 +40,13 @@ namespace Blogs.Services
             return principal;
         }
 
-        public async Task<User> ValidateUserCredentials(string email, string password)
+        public async Task<UserObject> ValidateUserCredentials(string email, string password)
         {
             var user = await UserRepository.GetUserByEmail(email);
 
             //Complicated password comparison
             if (user?.Password == password)
-                return user;
+                return Mapper.Map<UserObject>(user);
 
             return null;
         }

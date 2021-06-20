@@ -15,13 +15,13 @@ namespace Blogs.Data.Repositories
 
         }
 
-        public async Task<List<Post>> GetPendingPostsByStatus(PostStatus status)
+        public async Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status)
         {
             var posts = await Db.Posts.Where(post => post.StatusId == status && !post.IsDeleted).ToListAsync();
             return posts;
         }
 
-        public async Task<List<Post>> GetPostsByWriterId(Guid writerId)
+        public async Task<IEnumerable<Post>> GetPostsByWriterId(Guid writerId)
         {
             var posts = await Db.Posts.Where(post => post.WriterId == writerId && !post.IsDeleted).ToListAsync();
             return posts;

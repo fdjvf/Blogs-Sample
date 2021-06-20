@@ -11,7 +11,7 @@ namespace Blogs.Data.Abstract
         /// Get all comments of a post
         /// </summary>
         /// <returns></returns>
-        Task<List<Comment>> GetCommentsByPostId(Guid postId);
+        Task<IEnumerable<Comment>> GetCommentsByPostId(Guid postId);
 
         /// <summary>
         /// Create a new comment in a post

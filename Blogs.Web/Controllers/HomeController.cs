@@ -1,27 +1,27 @@
-﻿using Blogs.Web.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Blogs.Services.Abstract;
+using Blogs.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Blogs.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IPostService PostService { get; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IPostService postService)
         {
-            _logger = logger;
+            PostService = postService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var posts = await PostService.GetPublicPosts();
+            return View(posts);
         }
 
-        [Authorize(Roles = "Editor")]
-        public IActionResult PendingStuff()
+        public IActionResult AccessDenied()
         {
             return View();
         }
@@ -32,10 +32,7 @@ namespace Blogs.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
+
 
     }
 }

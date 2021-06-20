@@ -3,9 +3,9 @@ using Blogs.Data.Model;
 using Blogs.Data.Repositories;
 using Blogs.Services;
 using Blogs.Services.Abstract;
+using Blogs.Services.Maps;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,10 +26,14 @@ namespace Blogs.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<BlogsContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("BlogsDb")));
+             options.UseSqlServer(Configuration.GetConnectionString("BlogsDb"),
+            x => x.MigrationsAssembly("Blogs.Data")));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPostService, PostService>();
 
 
             services.AddAuthentication("CookieAuth")
@@ -39,6 +43,12 @@ namespace Blogs.Web
                     options.AccessDeniedPath = "/Home/AccessDenied";
                 });
 
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile<UserMap>();
+                config.AddProfile<SummaryPostMap>();
+            },
+            typeof(Startup));
             services.AddControllersWithViews();
         }
 
