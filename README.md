@@ -1,1 +1,1 @@
-# BlogsApp
+# Blogs App
