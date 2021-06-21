@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo(assemblyName: "Blogs.Services")]
 namespace Blogs.Data.Abstract
 {
     public abstract class BaseRepository<T>

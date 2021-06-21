@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Blogs.Data.Repositories
 {
-    public class CommentsRepository : BaseRepository<BlogsContext>, ICommentRepository
+    internal class CommentsRepository : BaseRepository<BlogsContext>, ICommentRepository
     {
         public CommentsRepository(BlogsContext blogContext) : base(blogContext)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blogs.Data.Repositories
 {
-    public class UserRepository : BaseRepository<BlogsContext>, IUserRepository
+    internal class UserRepository : BaseRepository<BlogsContext>, IUserRepository
     {
         public UserRepository(BlogsContext blogsContext) : base(blogsContext)
         {

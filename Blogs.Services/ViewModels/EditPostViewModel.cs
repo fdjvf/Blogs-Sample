@@ -1,7 +1,6 @@
 ﻿using Blogs.Data.Enums;
-using Blogs.Services.ViewModels;
 
-namespace Blogs.Web.ViewModels
+namespace Blogs.Services.ViewModels
 {
     public class EditPostViewModel
     {

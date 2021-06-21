@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blogs.Data.Model
 {
-    public partial class BlogsContext : DbContext
+    internal partial class BlogsContext : DbContext
     {
         public BlogsContext(DbContextOptions<BlogsContext> options)
             : base(options)

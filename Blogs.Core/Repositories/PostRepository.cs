@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blogs.Data.Repositories
 {
-    public class PostRepository : BaseRepository<BlogsContext>, IPostRepository
+    internal class PostRepository : BaseRepository<BlogsContext>, IPostRepository
     {
         public PostRepository(BlogsContext blogsContext) : base(blogsContext)
         {
