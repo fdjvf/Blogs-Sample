@@ -51,7 +51,7 @@
 * [Bootstrap](https://getbootstrap.com)
 * [ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-5.0)
 * [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
-* [Azure Microsoft SQL Server](https://azure.microsoft.com/en-us/services/sql-database/campaign)
+* [Azure SQL Server](https://azure.microsoft.com/en-us/services/sql-database/campaign)
 
 
 
@@ -106,7 +106,7 @@ To get debug a local copy, follow these simple example steps.
 10. That's it. You are ready to go.
 
 ### Code Setup
-1. Clone repository to your computer by going to the [repo link](https://github.com/fdjvf/BlogsAp) and clicking on option Code->Download Zip
+1. Clone repository to your computer by going to the [repo link](https://github.com/fdjvf/BlogsAp) and clicking on **Code->Download Zip**
 ![image](https://user-images.githubusercontent.com/11657124/122767614-75d11300-d268-11eb-9ee2-d8bdac3a1f3d.png)
 
 2. Unzip the code and open with Visual Studio the file called BlogsApp.sln
@@ -115,17 +115,17 @@ To get debug a local copy, follow these simple example steps.
 3. On Visual Studio, click on **Build Solution**
 ![image](https://user-images.githubusercontent.com/11657124/122768370-263f1700-d269-11eb-90d4-38151570c3ac.png)
 
-4. Now go to Blogs.API->appsettings.json and change the connection string value with the one from the previous step. Remember the database should be called Blogs
+4. Now go to **Blogs.API->appsettings.json** and change the connection string value with the one from the previous step. Remember the database should be called Blogs
 ![image](https://user-images.githubusercontent.com/11657124/122769022-cd23b300-d269-11eb-9d66-bceb7c4fff23.png)
 
-5. Do the previous step also for Blogs.Web->appsettings.json
-6. Now Change the target project to Blogs.Web
+5. Do the previous step also for **Blogs.Web->appsettings.json**
+6. Now Change the target project to **Blogs.Web**
 ![image](https://user-images.githubusercontent.com/11657124/122768523-4bcc2080-d269-11eb-8d99-741dc4314707.png)
 
-7. Now go to Tools->NuGet Package Manager->Package Manager Console .Make sure default project is Blogs.Web
+7. Now go to **Tools->NuGet Package Manager->Package Manager Console**. Make sure default project is **Blogs.Web**
 ![image](https://user-images.githubusercontent.com/11657124/122768721-7ddd8280-d269-11eb-8ee1-37f0961f076a.png)
 
-8. Type the command Update-Database .This will run the EF-Core Migrations and create all the neccessary tables and seed data.
+8. Type the command **Update-Database** .This will run the EF-Core Migrations and create all the neccessary tables and seed data.
 ![image](https://user-images.githubusercontent.com/11657124/122769255-08be7d00-d26a-11eb-94c0-b46f7f4ada7a.png)
 
 9. Now just run the app by clicking the **Play Button**
@@ -175,7 +175,7 @@ The API used API Key Auth to validate who the user is and if it is an Editor or 
 
 #### Credentials
 
-To use the API with POSTMAN , create a new request and add a new Header with Key called **AuthToken** and in the value use the following tokens:
+To use the API with **Postman** , create a new request and add a new Header with Key called **AuthToken** and in the value use the following tokens:
 ![image](https://user-images.githubusercontent.com/11657124/122782334-41645380-d276-11eb-84f6-9bd1473f46a2.png)
 
 Auth Tokens for REST API:
