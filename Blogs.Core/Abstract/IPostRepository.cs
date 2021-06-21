@@ -34,7 +34,7 @@ namespace Blogs.Data.Abstract
         /// </summary>
         /// <param name="updatedPost"></param>
         /// <returns></returns>
-        Task UpdatePost(Post updatedPost);
+        Task<Post> UpdatePost(Post updatedPost);
 
         /// <summary>
         /// Soft delete a post by Id

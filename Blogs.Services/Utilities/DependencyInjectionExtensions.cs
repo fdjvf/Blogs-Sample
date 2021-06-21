@@ -23,6 +23,7 @@ namespace Blogs.Data.Utilities
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ICommentRepository, CommentsRepository>();
+            services.AddScoped<IAuthTokenRepository, AuthTokenRepository>();
 
             return services;
         }
@@ -33,6 +34,7 @@ namespace Blogs.Data.Utilities
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentsService, CommentsService>();
+            services.AddScoped<IAuthTokenService, AuthTokenService>();
 
             return services;
         }
@@ -42,9 +44,10 @@ namespace Blogs.Data.Utilities
 
             config.AddProfile<UserMap>();
             config.AddProfile<SummaryPostMap>();
+            config.AddProfile<PostViewModelMap>();
             config.AddProfile<PostMap>();
             config.AddProfile<CommentMap>();
-
+            config.AddProfile<AuthTokenMap>();
             return config;
         }
     }

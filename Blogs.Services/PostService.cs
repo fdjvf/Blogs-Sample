@@ -64,14 +64,16 @@ namespace Blogs.Services
             await PostRepository.SavePost(postView.Content, postView.Title, writerId);
         }
 
-        public async Task UpdatePost(PostViewModel postView)
+        public async Task<PostObject> UpdatePost(PostViewModel postView)
         {
 
             var post = Mapper.Map<Post>(postView);
             if (postView.Status == PostStatus.Approved)
                 post.ApprovalDate = DateTime.Now;
 
-            await PostRepository.UpdatePost(post);
+            var updatedPost = await PostRepository.UpdatePost(post);
+
+            return Mapper.Map<PostObject>(updatedPost);
         }
 
         public async Task<PostViewModel> GetPostById(Guid postId)
@@ -79,6 +81,13 @@ namespace Blogs.Services
             var post = await PostRepository.GetPostById(postId);
             var result = Mapper.Map<PostViewModel>(post);
 
+            return result;
+        }
+
+        public async Task<IEnumerable<PostObject>> GetPendingPosts()
+        {
+            var pendingPosts = await PostRepository.GetPostsByStatus(PostStatus.PendingApproval);
+            var result = Mapper.Map<IEnumerable<PostObject>>(pendingPosts);
             return result;
         }
     }

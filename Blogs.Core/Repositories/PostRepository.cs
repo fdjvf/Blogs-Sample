@@ -43,7 +43,7 @@ namespace Blogs.Data.Repositories
             await Db.SaveChangesAsync();
         }
 
-        public async Task UpdatePost(Post updatedPost)
+        public async Task<Post> UpdatePost(Post updatedPost)
         {
             var originalPost = await GetPostById(updatedPost.Id);
             if (originalPost != null)
@@ -55,6 +55,7 @@ namespace Blogs.Data.Repositories
                 originalPost.Title = updatedPost.Title;
                 await Db.SaveChangesAsync();
             }
+            return originalPost;
         }
 
         public async Task SoftDeletePost(Guid postId)

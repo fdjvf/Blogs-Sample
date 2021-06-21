@@ -23,7 +23,8 @@ namespace Blogs.Services.ViewModels
 
         public string WriterName { get; set; }
 
-        public DateTime ApprovedDate { get; set; }
+        public DateTime? ApprovalDate { get; set; }
 
+        public DateTime SubmitDate { get; set; }
     }
 }

@@ -10,6 +10,8 @@ namespace Blogs.Services.Abstract
     public interface IPostService
     {
         Task<IEnumerable<SummaryPostViewModel>> GetPublicPosts();
+        Task<IEnumerable<PostObject>> GetPendingPosts();
+
         Task<IEnumerable<SummaryPostViewModel>> GetPendingPostsByUser(UserObject user);
         Task<IEnumerable<SummaryPostViewModel>> GetPostsByWriterIdAndStatus(Guid writerId, PostStatus status);
         Task<PostViewModel> GetPostById(Guid postId);
@@ -28,6 +30,6 @@ namespace Blogs.Services.Abstract
         /// </summary>
         /// <param name="postView"></param>
         /// <returns></returns>
-        Task UpdatePost(PostViewModel postView);
+        Task<PostObject> UpdatePost(PostViewModel postView);
     }
 }

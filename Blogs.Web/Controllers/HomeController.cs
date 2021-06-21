@@ -1,6 +1,5 @@
 ﻿using Blogs.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Blogs.Web.Controllers

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Blogs.Data.Abstract;
-using Blogs.Data.Model;
 using Blogs.Services.Abstract;
 using Blogs.Services.ViewModels;
 using System;

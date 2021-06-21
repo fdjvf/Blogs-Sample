@@ -23,14 +23,15 @@ namespace Blogs.Web
 
             services.AddBlogServices();
 
+            services.AddAutoMapper(config => config.AddObjectAutoMappers(), typeof(Startup));
+
             services.AddAuthentication("CookieAuth")
             .AddCookie("CookieAuth", options =>
                 {
                     options.LoginPath = "/Account/Login";
                     options.AccessDeniedPath = "/Home/AccessDenied";
                 });
-
-            services.AddAutoMapper(config => config.AddObjectAutoMappers(), typeof(Startup));
+            
             services.AddControllersWithViews();
         }
 
