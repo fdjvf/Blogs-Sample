@@ -20,11 +20,22 @@
     <li>
       <a href="#usage">Usage</a>
      <ul>
-        <li><a href="#credentials">Credentials</a></li>
-        <li><a href="#writer-demo">Writer Demo</a></li>
-        <li><a href="#editor-demo">Editor Demo </a></li>
-        <li><a href="#anonymous-demo">Anonymous Demo</a></li>
-      </ul>
+        <li>
+          <a href="#web-app">Web App</a>
+          <ul>
+          <li><a href="#credentials">Credentials</a></li>
+          <li><a href="#writer-demo">Writer Demo</a></li>
+          <li><a href="#editor-demo">Editor Demo </a></li>
+          <li><a href="#anonymous-demo">Anonymous Demo</a></li>          
+          </ul>       
+       </li> 
+        <li>
+          <a href="#rest-api">REST API</a>
+          <ul>
+          <li><a href="#credentials">Credentials</a></li>
+          <li><a href="#api-demo">API Demo (Postman)</a></li>  
+          </ul>       
+       </li>  
     </li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
@@ -50,7 +61,7 @@
 To get debug a local copy, follow these simple example steps.
 
 ### Prerequisites
-
+* [Postman](https://www.postman.com/downloads/)
 * [Visual Studio 2019 16.10.2](https://visualstudio.microsoft.com/downloads/) 
     * Make sure to mark the following workloads during installation:
         *  **ASP.NET and Web Development**
@@ -105,14 +116,16 @@ To get debug a local copy, follow these simple example steps.
 ![image](https://user-images.githubusercontent.com/11657124/122769255-08be7d00-d26a-11eb-94c0-b46f7f4ada7a.png)
 9. Now just run the app by clicking the **Play Button**
 ![image](https://user-images.githubusercontent.com/11657124/122769936-9c904900-d26a-11eb-8e45-c6fd33494bef.png)
-10. Voila !
+10. Voilà !
 ![image](https://user-images.githubusercontent.com/11657124/122770094-b9c51780-d26a-11eb-8688-effa53676df2.png)
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Credentials
+### Web App
+Web App to view,
+#### Credentials
 Use these to login:
 1. Writer 1
     * Username: writer
@@ -123,14 +136,40 @@ Use these to login:
 3. Writer 2
     * Username: writer2
     * Password: 1234
-### Writer Demo
+
+#### Writer Demo
 ![Writer User Blog](https://user-images.githubusercontent.com/11657124/122775210-82a53500-d26f-11eb-8661-d22063181bf2.gif)
 
-### Editor Demo
+#### Editor Demo
 ![Edito User Demo](https://user-images.githubusercontent.com/11657124/122775220-85078f00-d26f-11eb-9d26-1c8bbf88e030.gif)
 
-### Anonymous Demo
+#### Anonymous Demo
 ![Anonymous User Blog](https://user-images.githubusercontent.com/11657124/122775239-8933ac80-d26f-11eb-976c-73ba5680f8fd.gif)
+
+### REST API
+The API is Api Key Auth to validate who the user is and if it is an Editor or a Writer. Currently only **Editors** are able to use the API
+
+#### Credentials
+To use the API with POSTMAN , create a new request and add a new Header with Key called **AuthToken** and in the value use the following tokens:
+![image](https://user-images.githubusercontent.com/11657124/122782334-41645380-d276-11eb-84f6-9bd1473f46a2.png)
+
+Auth Tokens for REST API:
+1. Editor 1
+    * AuthToken: skzUF6rtAW
+2. Writer 1
+    * AuthToken: wrZTLJRCob
+
+#### API Demo
+
+##### Auth Demo/Get Pending Posts
+
+![Auth Sample-GetPendingPosts](https://user-images.githubusercontent.com/11657124/122783629-57264880-d277-11eb-967e-ff45ac4b7d10.gif)
+
+##### Update Post Status
+
+![Update Pending Post](https://user-images.githubusercontent.com/11657124/122784217-e4699d00-d277-11eb-9eb7-3fdaf8f7bd9a.gif)
+
+
 
 
 <!-- ACKNOWLEDGEMENTS -->
