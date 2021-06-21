@@ -17,11 +17,15 @@
         <li><a href="#code-setup">Code Setup</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+     <ul>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#writer-demo">Writer Demo</a></li>
+        <li><a href="#editor-demo">Editor Demo </a></li>
+        <li><a href="#anonymous-demo">Anonymous Demo</a></li>
+      </ul>
+    </li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -108,9 +112,26 @@ To get debug a local copy, follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Credentials
+Use these to login:
+1. Writer 1
+    * Username: writer
+    * Password: 1234
+2. Editor 1
+    * Username: editor
+    * Password: 1234
+3. Writer 2
+    * Username: writer2
+    * Password: 1234
+### Writer Demo
+![Writer User Blog](https://user-images.githubusercontent.com/11657124/122775210-82a53500-d26f-11eb-8661-d22063181bf2.gif)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Editor Demo
+![Edito User Demo](https://user-images.githubusercontent.com/11657124/122775220-85078f00-d26f-11eb-9d26-1c8bbf88e030.gif)
+
+### Anonymous Demo
+![Anonymous User Blog](https://user-images.githubusercontent.com/11657124/122775239-8933ac80-d26f-11eb-976c-73ba5680f8fd.gif)
+
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
