@@ -1,0 +1,25 @@
+﻿@model PostViewModel
+
+<div class="row">
+    <div class="col-md-8">
+        <section>
+
+            <h4>@Model.Title</h4>
+            <h6>Published on: @Model.ApprovedDate</h6>
+            <h6>Submited by: @Model.WriterName</h6>
+            <hr>
+            <p>
+                @Model.Content
+            </p>
+
+        </section>
+
+        <h5>Comments</h5>
+        <hr>
+        <vc:add-comment new-comment="new CommentViewModel {PostId=Model.Id}"></vc:add-comment>
+        <vc:comments post-id="Model.Id"></vc:comments>
+    </div>
+
+
+
+</div>

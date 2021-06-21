@@ -18,6 +18,12 @@ namespace Blogs.Services.ViewModels
 
         [Required]
         public string Content { get; set; }
+
         public Guid WriterId { get; set; }
+
+        public string WriterName { get; set; }
+
+        public DateTime ApprovedDate { get; set; }
+
     }
 }

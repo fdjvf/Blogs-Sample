@@ -224,6 +224,8 @@ namespace Blogs.Data.Model
 
                 entity.Property(e => e.Text).IsRequired();
 
+                entity.Property(e => e.CreationDate).IsRequired();
+
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.PostId)

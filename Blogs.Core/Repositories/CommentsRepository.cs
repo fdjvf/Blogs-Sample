@@ -17,15 +17,9 @@ namespace Blogs.Data.Repositories
 
         public async Task<IEnumerable<Comment>> GetCommentsByPostId(Guid postId)
         {
-            var result = await Db.Comments.Where(comment => comment.PostId == postId && !comment.IsDeleted).ToListAsync();
+            var result = await Db.Comments.Include(comment => comment.Writer)
+                .Where(comment => comment.PostId == postId && !comment.IsDeleted).ToListAsync();
             return result;
-        }
-
-        public async Task<IEnumerable<(Guid postId, IEnumerable<Comment> comments)>> GetCommentsByPostIds(Guid[] postIds)
-        {
-            var comments = await Db.Comments.Where(comment => postIds.Contains(comment.PostId) && !comment.IsDeleted).ToListAsync();
-            var groupedComments = comments.GroupBy(comment => comment.PostId, (postId, comments) => (postId, comments));
-            return groupedComments;
         }
 
         public async Task SaveComment(Guid postId, string text, Guid? userId)
@@ -34,7 +28,8 @@ namespace Blogs.Data.Repositories
             {
                 PostId = postId,
                 Text = text,
-                WriterId = userId
+                WriterId = userId,
+                CreationDate = DateTime.Now
             };
 
             Db.Comments.Add(newComment);

@@ -1,0 +1,17 @@
+﻿@model CommentViewModel
+
+
+<form asp-controller="Comments" asp-action="CreateComment">
+    <h6>Create Comment</h6>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="PostId" />
+    <input type="hidden" asp-for="WriterId" />
+
+    <div class="form-group">
+        <textarea asp-for="Text" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </div>
+</form>

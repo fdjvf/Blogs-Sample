@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blogs.Data.Abstract
 {
-    interface ICommentRepository
+    public interface ICommentRepository
     {
         /// <summary>
         /// Get all comments of a post
@@ -21,11 +21,5 @@ namespace Blogs.Data.Abstract
         /// <param name="userId">This value can be null for anonymous users.</param>
         Task SaveComment(Guid postId, string text, Guid? userId);
 
-        /// <summary>
-        /// Get comments using posts Ids
-        /// </summary>
-        /// <param name="postIds"></param>
-        /// <returns></returns>
-        Task<IEnumerable<(Guid postId, IEnumerable<Comment> comments)>> GetCommentsByPostIds(Guid[] postIds);
     }
 }

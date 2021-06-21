@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CommentViewModel>
+@foreach (var comment in Model)
+{
+    string writerName = @comment.WriterId.HasValue ? comment.WriterName : "Anonymous";
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">@writerName</h6>
+            <p class="card-text">@comment.Text</p>
+            <h6 class="card-subtitle mb-2 text-muted">@comment.CreationDate</h6>
+        </div>
+    </div>
+    <br />
+}

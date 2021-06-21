@@ -9,7 +9,7 @@ namespace Blogs.Services.Utilities
     {
         public static Guid GetId(this ClaimsPrincipal principal)
         {
-            var guidstr = principal.FindFirst("Id")?.Value;
+            var guidstr = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             Guid.TryParse(guidstr, out Guid result);
             return result;
         }

@@ -11,6 +11,7 @@ namespace Blogs.Data.Model
         public bool IsDeleted { get; set; }
         public Guid? WriterId { get; set; }
         public Guid PostId { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public virtual Post Post { get; set; }
         public virtual User Writer { get; set; }

@@ -30,18 +30,16 @@ namespace Blogs.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel loginInfo)
         {
-            if (ModelState.IsValid)
-            {
-                var user = await UserService.ValidateUserCredentials(loginInfo.UserName, loginInfo.Password);
-                if (user != null)
-                {
-                    var identity = UserService.GetUserIdentity(user,"Cookies");
-                    await HttpContext.SignInAsync("CookieAuth", identity);
-                    return RedirectToAction("Index", "Home");
-                }
 
-                ModelState.AddModelError("WrongCredentials", "Wrong Credentials");
+            var user = await UserService.ValidateUserCredentials(loginInfo.UserName, loginInfo.Password);
+            if (user != null)
+            {
+                var identity = UserService.GetUserIdentity(user, "Cookies");
+                await HttpContext.SignInAsync("CookieAuth", identity);
+                return RedirectToAction("Index", "Home");
             }
+
+            ModelState.AddModelError("WrongCredentials", "Wrong Credentials");
             return View(loginInfo);
 
 

@@ -68,7 +68,7 @@ namespace Blogs.Data.Repositories
 
         public async Task<Post> GetPostById(Guid postId)
         {
-            var post = await Db.Posts.FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
+            var post = await Db.Posts.Include(post => post.Writer).FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
             return post;
         }
     }

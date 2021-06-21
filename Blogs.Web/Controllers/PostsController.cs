@@ -18,6 +18,22 @@ namespace Blogs.Web.Controllers
             PostService = postService;
         }
 
+        [AllowAnonymous]
+        [Route("[controller]/Detailed/{Id}")]
+        public async Task<IActionResult> GetPost(Guid id)
+        {
+            var approvedPost = await PostService.GetPostById(id);
+            if (approvedPost != null)
+            {
+                if (approvedPost.Status == PostStatus.Approved)
+                {
+                    return View("DetailedPost", approvedPost);
+                }
+            }
+
+            return RedirectToAction("AccessDenied", "Home");
+        }
+
         [Authorize(Roles = "Writer")]
         [Route("[controller]/Approved")]
         public async Task<IActionResult> ApprovedPosts()
@@ -56,13 +72,8 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Add")]
         public async Task<IActionResult> CreatePost(PostViewModel postView)
         {
-            if (ModelState.IsValid)
-            {
-                await PostService.SavePost(postView, User.GetId());
-                return RedirectToAction("Pending");
-            }
-
-            return View("AddPost", postView);
+            await PostService.SavePost(postView, User.GetId());
+            return RedirectToAction("Pending");
         }
 
 
