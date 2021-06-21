@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blogs.Data.Migrations
 {
     [DbContext(typeof(BlogsContext))]
-    [Migration("20210620151311_AddedTitletoPosts")]
-    partial class AddedTitletoPosts
+    [Migration("20210621063020_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,6 +42,9 @@ namespace Blogs.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Token")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("AuthTokens");
@@ -49,10 +52,17 @@ namespace Blogs.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d512c3b6-58fb-4313-a64c-3bc4e2829381"),
-                            ExpirationDate = new DateTime(2021, 9, 20, 10, 13, 10, 875, DateTimeKind.Local).AddTicks(233),
+                            Id = new Guid("d0abe929-4a71-4250-9c0b-404baa25465f"),
+                            ExpirationDate = new DateTime(2021, 9, 21, 1, 30, 19, 795, DateTimeKind.Local).AddTicks(1895),
                             Token = "skzUF6rtAW",
                             UserId = new Guid("93da2d99-6e0a-4afe-a039-ba290f10cac1")
+                        },
+                        new
+                        {
+                            Id = new Guid("3cf45bae-9167-4010-ad38-eaad4974fd88"),
+                            ExpirationDate = new DateTime(2021, 9, 21, 1, 30, 19, 795, DateTimeKind.Local).AddTicks(8566),
+                            Token = "wrZTLJRCob",
+                            UserId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         });
                 });
 
@@ -62,6 +72,9 @@ namespace Blogs.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("(newid())");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -101,6 +114,9 @@ namespace Blogs.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,6 +136,100 @@ namespace Blogs.Data.Migrations
                     b.HasIndex("WriterId");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ef510b14-9140-45e9-9842-01c83dce0ded"),
+                            ApprovalDate = new DateTime(2021, 6, 19, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(2214),
+                            IsDeleted = false,
+                            StatusId = 1,
+                            SubmitDate = new DateTime(2021, 6, 18, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(3822),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Title 1",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("382e5826-b839-4df6-9146-25a4a20320d0"),
+                            ApprovalDate = new DateTime(2021, 6, 19, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4262),
+                            IsDeleted = false,
+                            StatusId = 1,
+                            SubmitDate = new DateTime(2021, 6, 18, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4279),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Title 2",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("e3f449f4-0580-456c-a6c2-11ef7d352c1d"),
+                            IsDeleted = false,
+                            StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4283),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Pending Title 1",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("cf321898-5aa1-4f2a-a902-60984c05af43"),
+                            IsDeleted = false,
+                            StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4286),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Pending Title 2",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("5136d26b-bd2a-4a1d-865d-64d72a424e8f"),
+                            IsDeleted = false,
+                            StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4289),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Pending Title 3",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("dfd60ef4-58ea-4f48-a8f6-8d65afda5af3"),
+                            IsDeleted = false,
+                            StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4294),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Pending Title 4",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("c13e6148-479c-4f18-b085-b14e06e5cabe"),
+                            IsDeleted = false,
+                            StatusId = 2,
+                            SubmitDate = new DateTime(2021, 6, 16, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4303),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Rejected Title 1",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("8cc79c13-2f5b-4a1e-819d-f19f995859fe"),
+                            IsDeleted = false,
+                            StatusId = 2,
+                            SubmitDate = new DateTime(2021, 6, 16, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4306),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Rejected Title 2",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            Id = new Guid("d978e6b3-6409-49c1-9642-ddc3477a2f43"),
+                            IsDeleted = false,
+                            StatusId = 2,
+                            SubmitDate = new DateTime(2021, 6, 16, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4309),
+                            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
+                            Title = "Post Rejected Title 3",
+                            WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        });
                 });
 
             modelBuilder.Entity("Blogs.Data.Model.Role", b =>
@@ -193,7 +303,7 @@ namespace Blogs.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("(newid())");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -203,9 +313,14 @@ namespace Blogs.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
+                    b.HasIndex("UserName")
                         .IsUnique();
 
                     b.ToTable("Users");
@@ -214,14 +329,23 @@ namespace Blogs.Data.Migrations
                         new
                         {
                             Id = new Guid("93da2d99-6e0a-4afe-a039-ba290f10cac1"),
-                            Email = "editor@sample.com",
-                            Password = "1234"
+                            Name = "Editor Number 1",
+                            Password = "1234",
+                            UserName = "editor"
                         },
                         new
                         {
                             Id = new Guid("e720064a-0ef2-4070-a9be-39db075bd485"),
-                            Email = "writer@sample.com",
-                            Password = "1234"
+                            Name = "Writer Number 1",
+                            Password = "1234",
+                            UserName = "writer"
+                        },
+                        new
+                        {
+                            Id = new Guid("6dd192b3-fa1f-46b1-bc91-dbdbf8cd40ce"),
+                            Name = "Writer Number 2",
+                            Password = "1234",
+                            UserName = "writer2"
                         });
                 });
 
@@ -249,6 +373,11 @@ namespace Blogs.Data.Migrations
                         {
                             RolesId = new Guid("1d696eb7-147e-4570-af78-ab6f57770e60"),
                             UsersId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
+                        },
+                        new
+                        {
+                            RolesId = new Guid("1d696eb7-147e-4570-af78-ab6f57770e60"),
+                            UsersId = new Guid("6dd192b3-fa1f-46b1-bc91-dbdbf8cd40ce")
                         });
                 });
 

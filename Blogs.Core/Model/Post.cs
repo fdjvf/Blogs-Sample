@@ -20,7 +20,7 @@ namespace Blogs.Data.Model
         public PostStatus StatusId { get; set; }
         public Guid WriterId { get; set; }
         public DateTime? ApprovalDate { get; set; }
-
+        public DateTime SubmitDate { get; set; }
         public virtual Status Status { get; set; }
         public virtual User Writer { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

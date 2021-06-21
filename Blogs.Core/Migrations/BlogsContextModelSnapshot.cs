@@ -40,6 +40,9 @@ namespace Blogs.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Token")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("AuthTokens");
@@ -47,10 +50,17 @@ namespace Blogs.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e647d970-e4f4-41c2-920e-94c6d5a4ceae"),
-                            ExpirationDate = new DateTime(2021, 9, 21, 0, 4, 9, 871, DateTimeKind.Local).AddTicks(1482),
+                            Id = new Guid("d0abe929-4a71-4250-9c0b-404baa25465f"),
+                            ExpirationDate = new DateTime(2021, 9, 21, 1, 30, 19, 795, DateTimeKind.Local).AddTicks(1895),
                             Token = "skzUF6rtAW",
                             UserId = new Guid("93da2d99-6e0a-4afe-a039-ba290f10cac1")
+                        },
+                        new
+                        {
+                            Id = new Guid("3cf45bae-9167-4010-ad38-eaad4974fd88"),
+                            ExpirationDate = new DateTime(2021, 9, 21, 1, 30, 19, 795, DateTimeKind.Local).AddTicks(8566),
+                            Token = "wrZTLJRCob",
+                            UserId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         });
                 });
 
@@ -102,6 +112,9 @@ namespace Blogs.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -125,83 +138,92 @@ namespace Blogs.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("78eb3fe4-6b17-42e7-8010-1196c78e8ecd"),
-                            ApprovalDate = new DateTime(2021, 6, 19, 0, 4, 9, 874, DateTimeKind.Local).AddTicks(9549),
+                            Id = new Guid("ef510b14-9140-45e9-9842-01c83dce0ded"),
+                            ApprovalDate = new DateTime(2021, 6, 19, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(2214),
                             IsDeleted = false,
                             StatusId = 1,
+                            SubmitDate = new DateTime(2021, 6, 18, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(3822),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Title 1",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("8bb2b816-d96e-4ba9-b3c3-ec751747a170"),
-                            ApprovalDate = new DateTime(2021, 6, 19, 0, 4, 9, 875, DateTimeKind.Local).AddTicks(1260),
+                            Id = new Guid("382e5826-b839-4df6-9146-25a4a20320d0"),
+                            ApprovalDate = new DateTime(2021, 6, 19, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4262),
                             IsDeleted = false,
                             StatusId = 1,
+                            SubmitDate = new DateTime(2021, 6, 18, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4279),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Title 2",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("805f7c86-1243-46fd-8d1a-b08b11673307"),
+                            Id = new Guid("e3f449f4-0580-456c-a6c2-11ef7d352c1d"),
                             IsDeleted = false,
                             StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4283),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Pending Title 1",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("0429c664-ea5d-4b06-856f-0dc61267b023"),
+                            Id = new Guid("cf321898-5aa1-4f2a-a902-60984c05af43"),
                             IsDeleted = false,
                             StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4286),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Pending Title 2",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("0f49c40a-8f27-4319-a131-c34387588058"),
+                            Id = new Guid("5136d26b-bd2a-4a1d-865d-64d72a424e8f"),
                             IsDeleted = false,
                             StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4289),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Pending Title 3",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("9a76fa8b-b112-4a3b-8771-0298bc81fb1a"),
+                            Id = new Guid("dfd60ef4-58ea-4f48-a8f6-8d65afda5af3"),
                             IsDeleted = false,
                             StatusId = 0,
+                            SubmitDate = new DateTime(2021, 6, 17, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4294),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Pending Title 4",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("2324e8a8-69c3-40fb-9c55-cfe72e28111d"),
+                            Id = new Guid("c13e6148-479c-4f18-b085-b14e06e5cabe"),
                             IsDeleted = false,
                             StatusId = 2,
+                            SubmitDate = new DateTime(2021, 6, 16, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4303),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Rejected Title 1",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("2d1c9447-54a3-4797-ab9f-abb742cd4206"),
+                            Id = new Guid("8cc79c13-2f5b-4a1e-819d-f19f995859fe"),
                             IsDeleted = false,
                             StatusId = 2,
+                            SubmitDate = new DateTime(2021, 6, 16, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4306),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Rejected Title 2",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")
                         },
                         new
                         {
-                            Id = new Guid("bfe97427-b4d4-42fd-b33f-58642f156554"),
+                            Id = new Guid("d978e6b3-6409-49c1-9642-ddc3477a2f43"),
                             IsDeleted = false,
                             StatusId = 2,
+                            SubmitDate = new DateTime(2021, 6, 16, 1, 30, 19, 799, DateTimeKind.Local).AddTicks(4309),
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
                             Title = "Post Rejected Title 3",
                             WriterId = new Guid("e720064a-0ef2-4070-a9be-39db075bd485")

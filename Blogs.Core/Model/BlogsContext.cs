@@ -87,6 +87,14 @@ namespace Blogs.Data.Model
                       ExpirationDate=DateTime.Now.AddMonths(3),
                       Token="skzUF6rtAW",
                       UserId=new Guid("93DA2D99-6E0A-4AFE-A039-BA290F10CAC1")
+                    },
+                    new AuthToken
+                    {
+                      //We add an auth token for the Writer User (Just to show that Auth is working)
+                      Id=Guid.NewGuid(),
+                      ExpirationDate=DateTime.Now.AddMonths(3),
+                      Token="wrZTLJRCob",
+                      UserId=new Guid("E720064A-0EF2-4070-A9BE-39DB075BD485")
                     }
                 };
             }
@@ -117,6 +125,7 @@ namespace Blogs.Data.Model
                         StatusId = PostStatus.Approved,
                         Title = $"Post Title {i}",
                         WriterId = writerId,
+                        SubmitDate = DateTime.Now.AddDays(-3),
                         Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. 
                             Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. 
                             Donec mollis accumsan neque ac pharetra"
@@ -132,6 +141,7 @@ namespace Blogs.Data.Model
                         StatusId = PostStatus.PendingApproval,
                         Title = $"Post Pending Title {i}",
                         WriterId = writerId,
+                        SubmitDate = DateTime.Now.AddDays(-4),
                         Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. 
                             Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. 
                             Donec mollis accumsan neque ac pharetra"
@@ -146,6 +156,7 @@ namespace Blogs.Data.Model
                         Id = Guid.NewGuid(),
                         StatusId = PostStatus.Rejected,
                         Title = $"Post Rejected Title {i}",
+                        SubmitDate = DateTime.Now.AddDays(-5),
                         WriterId = writerId,
                         Text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. 
                             Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. 
@@ -208,6 +219,7 @@ namespace Blogs.Data.Model
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
                 entity.Property(e => e.ExpirationDate).IsRequired();
                 entity.Property(e => e.Token).HasMaxLength(100).IsRequired();
+                entity.HasIndex(e => e.Token).IsUnique();
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Tokens)
@@ -244,6 +256,8 @@ namespace Blogs.Data.Model
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.ApprovalDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SubmitDate).IsRequired();
 
                 entity.Property(e => e.Text).IsRequired();
 

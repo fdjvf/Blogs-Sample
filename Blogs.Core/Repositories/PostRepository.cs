@@ -36,6 +36,7 @@ namespace Blogs.Data.Repositories
                 Text = text,
                 WriterId = writerId,
                 StatusId = PostStatus.PendingApproval,
+                SubmitDate = DateTime.Now,
                 Title = title
             };
             Db.Posts.Add(newPost);
