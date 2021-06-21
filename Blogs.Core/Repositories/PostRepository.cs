@@ -16,6 +16,13 @@ namespace Blogs.Data.Repositories
 
         }
 
+        public async Task<Post> GetPostById(Guid postId)
+        {
+            var post = await Db.Posts.Include(post => post.Writer) //We need the writers information
+                .FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
+            return post;
+        }
+
         public async Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status)
         {
             var posts = await Db.Posts.Include(post => post.Writer)
@@ -65,15 +72,11 @@ namespace Blogs.Data.Repositories
             if (originalPost != null)
             {
                 originalPost.IsDeleted = true;
+                //TODO: Soft delete post's comments as well
                 await Db.SaveChangesAsync();
             }
         }
 
-        public async Task<Post> GetPostById(Guid postId)
-        {
-            var post = await Db.Posts.Include(post => post.Writer) //We need the writers information
-                .FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
-            return post;
-        }
+       
     }
 }

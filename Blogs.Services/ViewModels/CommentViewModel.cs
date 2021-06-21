@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Blogs.Services.ViewModels
 {
+    /// <summary>
+    /// Comment model used for UI interaction
+    /// </summary>
     public class CommentViewModel
     {
         [Required]

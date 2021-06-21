@@ -15,7 +15,7 @@ namespace Blogs.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(Guid postId)
         {
-            var postComments = await CommentsService.GetCommentsByPostId(postId);
+            var postComments = await CommentsService.GetCommentsByPostIdAsync(postId);
             return View(postComments);
         }
     }

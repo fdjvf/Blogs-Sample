@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Blogs.Services.ViewModels
 {
+    /// <summary>
+    /// Post model used for viewing or editing a Post
+    /// </summary>
     public class PostViewModel
     {
         public Guid Id { get; set; }

@@ -25,7 +25,7 @@ namespace Blogs.Api.Controllers
         /// </summary>
         public async Task<IActionResult> GetPendingPosts()
         {
-            var pendingPosts = await PostService.GetPendingPosts();
+            var pendingPosts = await PostService.GetPendingPostsAsync();
             return Ok(new { Count = pendingPosts.Count(), Posts = pendingPosts });
         }
 
@@ -42,14 +42,14 @@ namespace Blogs.Api.Controllers
             if (postStatus == PostStatus.PendingApproval)
                 return BadRequest("PostStatus value can only be 'Rejected' or 'Approved'.");
 
-            var postToUpdate = await PostService.GetPostById(postId);
+            var postToUpdate = await PostService.GetPostByIdAsync(postId);
 
             if (postToUpdate.Status != PostStatus.PendingApproval)
                 return BadRequest("Unable to update this Post because it's not pending approval.");
 
             postToUpdate.Status = postStatus;
 
-            return Ok(await PostService.UpdatePost(postToUpdate));
+            return Ok(await PostService.UpdatePostAsync(postToUpdate));
         }
     }
 }

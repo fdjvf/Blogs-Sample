@@ -15,7 +15,7 @@ namespace Blogs.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var posts = await PostService.GetPublicPosts();
+            var posts = await PostService.GetPublicPostsAsync();
             return View(posts);
         }
 

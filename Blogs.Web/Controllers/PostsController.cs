@@ -22,7 +22,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Detailed/{Id}")]
         public async Task<IActionResult> GetPost(Guid id)
         {
-            var approvedPost = await PostService.GetPostById(id);
+            var approvedPost = await PostService.GetPostByIdAsync(id);
             if (approvedPost != null)
             {
                 if (approvedPost.Status == PostStatus.Approved)
@@ -38,7 +38,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Approved")]
         public async Task<IActionResult> ApprovedPosts()
         {
-            var myPosts = await PostService.GetPostsByWriterIdAndStatus(User.GetId(), PostStatus.Approved);
+            var myPosts = await PostService.GetPostsByWriterIdAndStatusAsync(User.GetId(), PostStatus.Approved);
             return View(myPosts);
         }
 
@@ -46,7 +46,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Rejected")]
         public async Task<IActionResult> RejectedPosts()
         {
-            var myPosts = await PostService.GetPostsByWriterIdAndStatus(User.GetId(), PostStatus.Rejected);
+            var myPosts = await PostService.GetPostsByWriterIdAndStatusAsync(User.GetId(), PostStatus.Rejected);
             return View(myPosts);
         }
 
@@ -54,7 +54,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Pending")]
         public async Task<IActionResult> PendingPosts()
         {
-            var pendingPosts = await PostService.GetPendingPostsByUser(User.ToUserObject());
+            var pendingPosts = await PostService.GetPendingPostsByUserAsync(User.ToUserObject());
             return View(pendingPosts);
         }
 
@@ -72,7 +72,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Add")]
         public async Task<IActionResult> CreatePost(PostViewModel postView)
         {
-            await PostService.SavePost(postView, User.GetId());
+            await PostService.SavePostAsync(postView, User.GetId());
             return RedirectToAction("Pending");
         }
 
@@ -81,7 +81,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Rejected/{Id}")]
         public async Task<IActionResult> EditRejectedPost(Guid id)
         {
-            var rejectedPost = await PostService.GetPostById(id);
+            var rejectedPost = await PostService.GetPostByIdAsync(id);
             if (rejectedPost != null)
             {
                 if (rejectedPost.Status == PostStatus.Rejected && rejectedPost.WriterId == User.GetId())
@@ -103,7 +103,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Pending/{Id}")]
         public async Task<IActionResult> EditPendingPost(Guid id)
         {
-            var pendingPost = await PostService.GetPostById(id);
+            var pendingPost = await PostService.GetPostByIdAsync(id);
             if (pendingPost != null)
             {
                 if (pendingPost.Status == PostStatus.PendingApproval)
@@ -124,7 +124,7 @@ namespace Blogs.Web.Controllers
         [Route("[controller]/Edit")]
         public async Task<IActionResult> EditPost(EditPostViewModel postView)
         {
-            await PostService.UpdatePost(postView.Post);
+            await PostService.UpdatePostAsync(postView.Post);
             return RedirectToAction(postView.RedirectAction);
         }
     }

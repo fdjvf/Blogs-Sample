@@ -2,6 +2,9 @@
 
 namespace Blogs.Services.ViewModels
 {
+    /// <summary>
+    /// Model used for mapping user credentials through the UI
+    /// </summary>
     public class LoginViewModel
     {
         [Required]

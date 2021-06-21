@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Blogs.Services.Maps
 {
+    /// <summary>
+    /// Automatic mapping between <see cref="AuthToken"/> and <see cref="AuthTokenObject"/>
+    /// </summary>
     public class AuthTokenMap : Profile
     {
         public AuthTokenMap()

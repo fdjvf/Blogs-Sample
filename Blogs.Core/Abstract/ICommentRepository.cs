@@ -11,7 +11,7 @@ namespace Blogs.Data.Abstract
     public interface ICommentRepository
     {
         /// <summary>
-        /// Get all comments of a post
+        /// Get all comments by the PostId
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(Guid postId);
@@ -21,7 +21,7 @@ namespace Blogs.Data.Abstract
         /// </summary>
         /// <param name="postId"></param>
         /// <param name="text">Comment content</param>
-        /// <param name="userId">This value can be null for anonymous users.</param>
+        /// <param name="userId">This value will be null for anonymous users.</param>
         Task SaveCommentAsync(Guid postId, string text, Guid? userId);
 
     }

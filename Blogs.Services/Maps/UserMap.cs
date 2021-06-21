@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Blogs.Services.Maps
 {
+    /// <summary>
+    /// Automatic mapping between <see cref="User"/> and <see cref="UserObject"/>
+    /// </summary>
     public class UserMap : Profile
     {
         public UserMap()

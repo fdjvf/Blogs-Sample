@@ -15,7 +15,7 @@ namespace Blogs.Web.Controllers
 
         public async Task<IActionResult> CreateComment(CommentViewModel commentView)
         {           
-            await CommentsService.SaveComment(commentView);
+            await CommentsService.SaveCommentAsync(commentView);
             return RedirectToAction("Detailed", "Posts", new { Id = commentView.PostId });
         }
     }

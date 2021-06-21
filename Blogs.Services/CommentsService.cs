@@ -19,14 +19,14 @@ namespace Blogs.Services
             Mapper = mapper;
         }
 
-        public async Task SaveComment(CommentViewModel commentViewModel)
+        public async Task SaveCommentAsync(CommentViewModel commentViewModel)
         {
-            await CommentRepository.SaveComment(commentViewModel.PostId, commentViewModel.Text, commentViewModel.WriterId);
+            await CommentRepository.SaveCommentAsync(commentViewModel.PostId, commentViewModel.Text, commentViewModel.WriterId);
         }
 
-        public async Task<IEnumerable<CommentViewModel>> GetCommentsByPostId(Guid postId)
+        public async Task<IEnumerable<CommentViewModel>> GetCommentsByPostIdAsync(Guid postId)
         {
-            var comments = await CommentRepository.GetCommentsByPostId(postId);
+            var comments = await CommentRepository.GetCommentsByPostIdAsync(postId);
             return Mapper.Map<IEnumerable<CommentViewModel>>(comments);
         }
     }

@@ -2,6 +2,9 @@
 
 namespace Blogs.Services.Dto
 {
+    /// <summary>
+    /// DTO of Post Model. Used as a respose model in the API
+    /// </summary>
     public class PostObject
     {
         public Guid Id { get; set; }

@@ -32,7 +32,7 @@ namespace Blogs.Api.Attributes
             }
 
             var authService = context.HttpContext.RequestServices.GetRequiredService<IAuthTokenService>();
-            var tokenInfo = await authService.GetTokenInfo(token);
+            var tokenInfo = await authService.GetTokenInfoAsync(token);
 
             if (tokenInfo == null)
             {

@@ -2,6 +2,9 @@
 
 namespace Blogs.Services.ViewModels
 {
+    /// <summary>
+    /// Post model used to show a small part of the post's information during UI interaction
+    /// </summary>
     public class SummaryPostViewModel
     {
         public Guid Id { get; set; }

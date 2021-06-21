@@ -17,9 +17,9 @@ namespace Blogs.Services
             Mapper = mapper;
         }
 
-        public async Task<AuthTokenObject> GetTokenInfo(string token)
+        public async Task<AuthTokenObject> GetTokenInfoAsync(string token)
         {
-            var authtoken = await AuthTokenRepository.GetAuthTokenByToken(token);
+            var authtoken = await AuthTokenRepository.GetAuthTokenByTokenAsync(token);
             return Mapper.Map<AuthTokenObject>(authtoken);
         }
     }

@@ -2,6 +2,9 @@
 
 namespace Blogs.Services.ViewModels
 {
+    /// <summary>
+    /// Post model used for Edit UI interaction
+    /// </summary>
     public class EditPostViewModel
     {
         public PostViewModel Post { get; set; }

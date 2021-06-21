@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Blogs.Data.Model;
-using Blogs.Services.Dto;
 using Blogs.Services.ViewModels;
 
 namespace Blogs.Services.Maps
 {
+
+    /// <summary>
+    /// Automatic mapping between <see cref="Post"/> and <see cref="PostViewModel"/>
+    /// </summary>
     public class PostViewModelMap : Profile
     {
         public PostViewModelMap()

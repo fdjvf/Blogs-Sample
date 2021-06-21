@@ -4,6 +4,9 @@ using Blogs.Services.ViewModels;
 
 namespace Blogs.Services.Maps
 {
+    /// <summary>
+    /// Automatic mapping between <see cref="Comment"/> and <see cref="CommentViewModel"/>
+    /// </summary>
     public class CommentMap : Profile
     {
         public CommentMap()

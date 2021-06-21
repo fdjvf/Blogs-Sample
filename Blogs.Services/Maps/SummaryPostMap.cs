@@ -4,6 +4,9 @@ using Blogs.Services.ViewModels;
 
 namespace Blogs.Services.Maps
 {
+    /// <summary>
+    /// Automatic mapping between <see cref="Post"/> and <see cref="SummaryPostViewModel"/>
+    /// </summary>
     public class SummaryPostMap : Profile
     {
         public SummaryPostMap()

@@ -13,6 +13,12 @@ namespace Blogs.Data.Utilities
 {
     public static class DependencyInjectionExtensions
     {
+        /// <summary>
+        /// Add all required data related services like repositories and DbContext
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddDataServices(this IServiceCollection services, IConfiguration configuration)
         {
 
@@ -28,6 +34,11 @@ namespace Blogs.Data.Utilities
             return services;
         }
 
+        /// <summary>
+        /// Add all services in charge of moving data between the UI and the Data layer
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddBlogServices(this IServiceCollection services)
         {
 
@@ -39,6 +50,11 @@ namespace Blogs.Data.Utilities
             return services;
         }
 
+        /// <summary>
+        /// Add profiles to activate between AutoMapping between different kind of objects
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public static IMapperConfigurationExpression AddObjectAutoMappers(this IMapperConfigurationExpression config)
         {
 

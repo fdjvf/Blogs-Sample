@@ -4,6 +4,9 @@ using Blogs.Services.Dto;
 
 namespace Blogs.Services.Maps
 {
+    /// <summary>
+    /// Automatic mapping between <see cref="Post"/> and <see cref="PostObject"/>
+    /// </summary>
     public class PostMap : Profile
     {
         public PostMap()
