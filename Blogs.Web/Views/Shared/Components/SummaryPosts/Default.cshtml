@@ -19,10 +19,17 @@
         </div>
         @if (post.PublishedOn.HasValue)
         {
-            <div class="card-footer text-muted">
+            <div class="card-footer">
                 @post.PublishedOn?.ToShortDateString()
+                
+                @if (User.IsEditor())
+                {
+                    <a asp-controller="Posts" asp-action="DeletePost" asp-route-id="@post.Id" class="btn btn-danger btn-sm ml-4"> Remove</a>
+                }
             </div>
         }
+
+
     </div>
     <br />
 }

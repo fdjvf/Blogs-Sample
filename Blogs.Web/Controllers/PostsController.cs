@@ -177,5 +177,18 @@ namespace Blogs.Web.Controllers
             await PostService.UpdatePostAsync(postView.Post);
             return RedirectToAction(postView.RedirectAction);
         }
+
+        /// <summary>
+        /// Edits a post
+        /// </summary>
+        /// <param name="postView"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Editor")]
+        [Route("[controller]/Remove/{Id}")]
+        public async Task<IActionResult> DeletePost(Guid id)
+        {
+            await PostService.DeletePostAsync(id);
+            return RedirectToAction("Index","Home");
+        }
     }
 }
