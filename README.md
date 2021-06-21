@@ -45,7 +45,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+**Development Time**: 28 Hours
 ### Built With
 
 * [Bootstrap](https://getbootstrap.com)
