@@ -7,7 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Blogs.Api.Attributes
-{
+
+{   /// <summary>
+    /// Action filter to validate whether the user using the API is either a Writer or an Editor.
+    /// If is not an Editor, the API returns 401 Unauthorized Response
+    /// </summary>
     [AttributeUsage(validOn: AttributeTargets.Class)]
     public class AuthTokenAttribute : Attribute, IAsyncActionFilter
     {
@@ -54,7 +58,7 @@ namespace Blogs.Api.Attributes
                 context.Result = notAuthorizedResult;
                 return;
             }
-            
+
             await next();
         }
     }
