@@ -6,7 +6,7 @@ namespace Blogs.Services.Abstract
 {
     public interface IUserService
     {
-        Task<UserObject> ValidateUserCredentials(string email, string password);
+        Task<UserObject> ValidateUserCredentials(string userName, string password);
         ClaimsPrincipal GetUserIdentity(UserObject user, string authType);
     }
 }

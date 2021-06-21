@@ -4,14 +4,16 @@ using Blogs.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blogs.Data.Migrations
 {
     [DbContext(typeof(BlogsContext))]
-    partial class BlogsContextModelSnapshot : ModelSnapshot
+    [Migration("20210621022047_ModifiedSeedUserName")]
+    partial class ModifiedSeedUserName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,8 +49,8 @@ namespace Blogs.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f6a9c89b-4794-4f42-85a1-e4c27352cb33"),
-                            ExpirationDate = new DateTime(2021, 9, 20, 21, 22, 44, 314, DateTimeKind.Local).AddTicks(7838),
+                            Id = new Guid("cd2c5c8d-8aff-44b5-9f81-87e4833955cc"),
+                            ExpirationDate = new DateTime(2021, 9, 20, 21, 20, 47, 472, DateTimeKind.Local).AddTicks(7564),
                             Token = "skzUF6rtAW",
                             UserId = new Guid("93da2d99-6e0a-4afe-a039-ba290f10cac1")
                         });
@@ -122,8 +124,8 @@ namespace Blogs.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("23155173-0fd2-42b1-86b7-e600e8356cce"),
-                            ApprovalDate = new DateTime(2021, 6, 18, 21, 22, 44, 318, DateTimeKind.Local).AddTicks(3446),
+                            Id = new Guid("9e5200f2-99ba-4734-aa23-939c6f0b25c2"),
+                            ApprovalDate = new DateTime(2021, 6, 18, 21, 20, 47, 476, DateTimeKind.Local).AddTicks(4628),
                             IsDeleted = false,
                             StatusId = 1,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -132,8 +134,8 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("69c8aef9-6480-44b0-856f-8f3bfcaac4c7"),
-                            ApprovalDate = new DateTime(2021, 6, 18, 21, 22, 44, 318, DateTimeKind.Local).AddTicks(5094),
+                            Id = new Guid("d8479f2c-e081-4cde-9ff3-70357d5a365a"),
+                            ApprovalDate = new DateTime(2021, 6, 18, 21, 20, 47, 476, DateTimeKind.Local).AddTicks(6306),
                             IsDeleted = false,
                             StatusId = 1,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -142,7 +144,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("49475b36-05c5-4e1c-ae7f-414b75310960"),
+                            Id = new Guid("4214ceaf-f9e6-44f6-b844-6b21062c87a5"),
                             IsDeleted = false,
                             StatusId = 0,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -151,7 +153,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("decd8182-e58e-4310-b5eb-a30135ea1ef8"),
+                            Id = new Guid("35e15cca-33f5-4a7f-afd0-74563d83bd3e"),
                             IsDeleted = false,
                             StatusId = 0,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -160,7 +162,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("750197d3-6c5e-4547-bafc-b6c9c5e9b28e"),
+                            Id = new Guid("d7411aee-8531-4d97-85a2-2b3f78cf0216"),
                             IsDeleted = false,
                             StatusId = 0,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -169,7 +171,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa5abf80-3135-41ec-8005-30cfc0a7ceab"),
+                            Id = new Guid("27967d76-1ada-44ec-8f42-56249c4dcc4f"),
                             IsDeleted = false,
                             StatusId = 0,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -178,7 +180,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("53d2b62b-19e7-4f94-b867-547a6fd445e0"),
+                            Id = new Guid("ad40d949-081f-44a4-b517-e9b787f4a3ae"),
                             IsDeleted = false,
                             StatusId = 2,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -187,7 +189,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("53ddab3f-a323-4f15-b9f1-d4aa8e4f61f9"),
+                            Id = new Guid("a092eff1-f7de-40b3-8832-c84c4c9925bd"),
                             IsDeleted = false,
                             StatusId = 2,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -196,7 +198,7 @@ namespace Blogs.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d6710461-cfbe-4770-83f7-7ebed52d5c39"),
+                            Id = new Guid("2fff1add-4d6d-41de-8812-2880af88a2de"),
                             IsDeleted = false,
                             StatusId = 2,
                             Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra orci augue, sit amet ornare mauris ullamcorper quis. Phasellus mollis mi id vehicula egestas. Vestibulum sodales dolor metus. \r\n                            Pellentesque a purus vel sapien scelerisque rutrum. Sed sed facilisis metus. \r\n                            Donec mollis accumsan neque ac pharetra",
@@ -277,9 +279,7 @@ namespace Blogs.Data.Migrations
                         .HasDefaultValueSql("(newid())");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()

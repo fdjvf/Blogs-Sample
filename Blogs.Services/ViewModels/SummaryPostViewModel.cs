@@ -7,7 +7,7 @@ namespace Blogs.Services.ViewModels
         public Guid Id { get; set; }
         public string Title { get; set; }
         public DateTime? PublishedOn { get; set; }
-
+        public string WriterName { get; set; }
         private string _ShortDescription;
         public string ShortDescription
         {

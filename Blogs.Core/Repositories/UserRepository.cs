@@ -12,10 +12,10 @@ namespace Blogs.Data.Repositories
 
         }
 
-        public async Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByUserName(string userName)
         {
             var user = await Db.Users.Include(user => user.Roles)
-                .FirstOrDefaultAsync(user => user.Email == email);
+                .FirstOrDefaultAsync(user => user.UserName == userName);
             return user;
         }
     }

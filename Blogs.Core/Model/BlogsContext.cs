@@ -38,19 +38,22 @@ namespace Blogs.Data.Model
                             new User
                             {
                                 Id = new Guid("93DA2D99-6E0A-4AFE-A039-BA290F10CAC1"),
-                                Email = "editor@sample.com",
+                                UserName = "editor",
+                                Name="Editor Number 1",
                                 Password = "1234",
                             },
                             new User
                             {
                                 Id = new Guid("E720064A-0EF2-4070-A9BE-39DB075BD485"),
-                                Email = "writer@sample.com",
+                                UserName = "writer",
+                                Name="Writer Number 1",
                                 Password = "1234",
                             },
                             new User
                             {
                                 Id = new Guid("6DD192B3-FA1F-46B1-BC91-DBDBF8CD40CE"),
-                                Email = "writer2@sample.com",
+                                UserName = "writer2",
+                                Name="Writer Number 2",
                                 Password = "1234",
                             }
                          };
@@ -160,8 +163,9 @@ namespace Blogs.Data.Model
             {
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
-                entity.HasIndex(e => e.Email).IsUnique();
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.UserName).IsRequired().HasMaxLength(100);
+                entity.HasIndex(e => e.UserName).IsUnique();
 
                 entity.Property(e => e.Password).IsRequired().HasMaxLength(256);
 

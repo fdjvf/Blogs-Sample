@@ -23,9 +23,9 @@ namespace Blogs.Services
         {
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name,user.Email),
-                new Claim(ClaimTypes.Email,user.Email),
-                new Claim("Id",user.Id.ToString())
+                new Claim(ClaimTypes.Name,user.UserName),
+                new Claim(ClaimTypes.GivenName,user.Name),
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
             };
 
             foreach (var role in user.Roles)
@@ -36,13 +36,12 @@ namespace Blogs.Services
             var mainIdentity = new ClaimsIdentity(claims, authType);
 
             var principal = new ClaimsPrincipal(mainIdentity);
-
             return principal;
         }
 
         public async Task<UserObject> ValidateUserCredentials(string email, string password)
         {
-            var user = await UserRepository.GetUserByEmail(email);
+            var user = await UserRepository.GetUserByUserName(email);
 
             //Complicated password comparison
             if (user?.Password == password)

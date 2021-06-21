@@ -28,12 +28,12 @@ namespace Blogs.Services.Utilities
         {
             var userId = principal.GetId();
             var roles = principal.Claims.Where(cl => cl.Type == ClaimTypes.Role).Select(cl => cl.Value);
-            var email = principal.Identity.Name;
             return new UserObject
             {
                 Id = userId,
                 Roles = roles,
-                Email = email
+                UserName = principal.Identity.Name,
+                Name = principal.FindFirst(ClaimTypes.GivenName)?.Value
             };
         }
     }

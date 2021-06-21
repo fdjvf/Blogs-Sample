@@ -1,7 +1,8 @@
 ﻿@model List<SummaryPostViewModel>
+@using System.Security.Claims;
 @{
     ViewData["Title"] = "Home Page";
 }
-<h3>Welcome!</h3>
+<h3>Welcome @User.FindFirst(ClaimTypes.GivenName)?.Value!</h3>
 
-<vc:summary-posts posts="@Model" edit-action="PlaceHolder"></vc:summary-posts>
+<vc:summary-posts posts="@Model" edit-action="Detailed"></vc:summary-posts>

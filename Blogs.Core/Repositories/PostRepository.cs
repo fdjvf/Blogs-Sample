@@ -18,7 +18,8 @@ namespace Blogs.Data.Repositories
 
         public async Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status)
         {
-            var posts = await Db.Posts.Where(post => post.StatusId == status && !post.IsDeleted).OrderBy(post => post.Title).ToListAsync();
+            var posts = await Db.Posts.Include(post => post.Writer)
+                .Where(post => post.StatusId == status && !post.IsDeleted).OrderBy(post => post.Title).ToListAsync();
             return posts;
         }
 

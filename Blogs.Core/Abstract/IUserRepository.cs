@@ -5,6 +5,6 @@ namespace Blogs.Data.Abstract
 {
     public interface IUserRepository
     {
-        Task<User> GetUserByEmail(string email);
+        Task<User> GetUserByUserName(string userName);
     }
 }

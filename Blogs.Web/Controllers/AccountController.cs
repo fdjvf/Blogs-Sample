@@ -32,7 +32,7 @@ namespace Blogs.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserService.ValidateUserCredentials(loginInfo.Email, loginInfo.Password);
+                var user = await UserService.ValidateUserCredentials(loginInfo.UserName, loginInfo.Password);
                 if (user != null)
                 {
                     var identity = UserService.GetUserIdentity(user,"Cookies");
