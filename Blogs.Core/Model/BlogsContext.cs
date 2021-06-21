@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Blogs.Data.Enums;
 using Microsoft.EntityFrameworkCore;
 
 #nullable disable

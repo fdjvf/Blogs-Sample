@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Blogs.Data.Abstract;
+using Blogs.Data.Enums;
 using Blogs.Data.Model;
 using Blogs.Services.Abstract;
 using Blogs.Services.Dto;

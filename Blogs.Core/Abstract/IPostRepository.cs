@@ -1,4 +1,5 @@
-﻿using Blogs.Data.Model;
+﻿using Blogs.Data.Enums;
+using Blogs.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

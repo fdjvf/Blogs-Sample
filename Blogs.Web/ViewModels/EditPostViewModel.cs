@@ -1,4 +1,4 @@
-﻿using Blogs.Data.Model;
+﻿using Blogs.Data.Enums;
 using Blogs.Services.ViewModels;
 
 namespace Blogs.Web.ViewModels

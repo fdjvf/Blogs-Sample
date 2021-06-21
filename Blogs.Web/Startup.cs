@@ -1,12 +1,6 @@
-using Blogs.Data.Abstract;
-using Blogs.Data.Model;
-using Blogs.Data.Repositories;
-using Blogs.Services;
-using Blogs.Services.Abstract;
-using Blogs.Services.Maps;
+using Blogs.Data.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,31 +19,18 @@ namespace Blogs.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<BlogsContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("BlogsDb"),
-            x => x.MigrationsAssembly("Blogs.Data")));
+            services.AddDataServices(Configuration);
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IPostRepository, PostRepository>();
-
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IPostService, PostService>();
-
+            services.AddBlogServices();
 
             services.AddAuthentication("CookieAuth")
-                .AddCookie("CookieAuth", options =>
+            .AddCookie("CookieAuth", options =>
                 {
                     options.LoginPath = "/Account/Login";
                     options.AccessDeniedPath = "/Home/AccessDenied";
                 });
 
-            services.AddAutoMapper(config =>
-            {
-                config.AddProfile<UserMap>();
-                config.AddProfile<SummaryPostMap>();
-                config.AddProfile<PostMap>();
-            },
-            typeof(Startup));
+            services.AddAutoMapper(config => config.AddObjectAutoMappers(), typeof(Startup));
             services.AddControllersWithViews();
         }
 
