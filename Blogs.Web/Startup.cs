@@ -47,6 +47,7 @@ namespace Blogs.Web
             {
                 config.AddProfile<UserMap>();
                 config.AddProfile<SummaryPostMap>();
+                config.AddProfile<PostMap>();
             },
             typeof(Startup));
             services.AddControllersWithViews();

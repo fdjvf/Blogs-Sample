@@ -42,25 +42,32 @@ namespace Blogs.Data.Repositories
 
         public async Task UpdatePost(Post updatedPost)
         {
-            var originalPost = await Db.Posts.FirstOrDefaultAsync(post => post.Id == updatedPost.Id && !post.IsDeleted);
+            var originalPost = await GetPostById(updatedPost.Id);
             if (originalPost != null)
             {
                 originalPost.StatusId = updatedPost.StatusId;
                 originalPost.WriterId = updatedPost.WriterId;
                 originalPost.ApprovalDate = updatedPost.ApprovalDate;
                 originalPost.Text = updatedPost.Text;
+                originalPost.Title = updatedPost.Title;
                 await Db.SaveChangesAsync();
             }
         }
 
         public async Task SoftDeletePost(Guid postId)
         {
-            var originalPost = await Db.Posts.FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
+            var originalPost = await GetPostById(postId);
             if (originalPost != null)
             {
                 originalPost.IsDeleted = true;
                 await Db.SaveChangesAsync();
             }
+        }
+
+        public async Task<Post> GetPostById(Guid postId)
+        {
+            var post = await Db.Posts.FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
+            return post;
         }
     }
 }

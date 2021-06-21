@@ -26,7 +26,7 @@ namespace Blogs.Data.Abstract
         /// <param name="text"></param>
         /// <param name="writerId"></param>
         /// <returns></returns>
-        Task SavePost(string text,string title ,Guid writerId);
+        Task SavePost(string text, string title, Guid writerId);
 
         /// <summary>
         /// Apply update to a post
@@ -42,5 +42,11 @@ namespace Blogs.Data.Abstract
         /// <returns></returns>
         Task SoftDeletePost(Guid postId);
 
+        /// <summary>
+        /// Get post by Id
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
+        Task<Post> GetPostById(Guid postId);
     }
 }

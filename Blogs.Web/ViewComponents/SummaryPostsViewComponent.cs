@@ -11,9 +11,9 @@ namespace Blogs.Web.ViewComponents
 
         }
 
-        public IViewComponentResult Invoke(IEnumerable<SummaryPostViewModel> posts)
+        public IViewComponentResult Invoke(IEnumerable<SummaryPostViewModel> posts, string editAction)
         {
-            return View(posts);
+            return View((posts, editAction));
         }
     }
 }

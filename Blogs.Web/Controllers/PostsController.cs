@@ -2,13 +2,15 @@
 using Blogs.Services.Abstract;
 using Blogs.Services.Utilities;
 using Blogs.Services.ViewModels;
+using Blogs.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Blogs.Web.Controllers
 {
-    [Authorize(Roles = "Writer")]
+    [Authorize]
     public class PostsController : Controller
     {
         private IPostService PostService { get; }
@@ -17,7 +19,7 @@ namespace Blogs.Web.Controllers
             PostService = postService;
         }
 
-
+        [Authorize(Roles = "Writer")]
         [Route("[controller]/Approved")]
         public async Task<IActionResult> ApprovedPosts()
         {
@@ -25,6 +27,7 @@ namespace Blogs.Web.Controllers
             return View(myPosts);
         }
 
+        [Authorize(Roles = "Writer")]
         [Route("[controller]/Rejected")]
         public async Task<IActionResult> RejectedPosts()
         {
@@ -33,7 +36,6 @@ namespace Blogs.Web.Controllers
         }
 
         [Authorize]
-        [Authorize(Roles = "Writer,Editor")]
         [Route("[controller]/Pending")]
         public async Task<IActionResult> PendingPosts()
         {
@@ -41,6 +43,9 @@ namespace Blogs.Web.Controllers
             return View(pendingPosts);
         }
 
+
+
+        [Authorize(Roles = "Writer")]
         [Route("[controller]/Add")]
         public IActionResult CreatePost()
         {
@@ -48,6 +53,7 @@ namespace Blogs.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         [Route("[controller]/Add")]
         public async Task<IActionResult> CreatePost(PostViewModel postView)
         {
@@ -58,6 +64,58 @@ namespace Blogs.Web.Controllers
             }
 
             return View("AddPost", postView);
+        }
+
+
+        [Authorize(Roles = "Writer")]
+        [Route("[controller]/Rejected/{Id}")]
+        public async Task<IActionResult> EditRejectedPost(Guid id)
+        {
+            var rejectedPost = await PostService.GetPostById(id);
+            if (rejectedPost != null)
+            {
+                if (rejectedPost.Status == PostStatus.Rejected && rejectedPost.WriterId == User.GetId())
+                {
+                    return View("EditPost", new EditPostViewModel
+                    {
+                        Post = rejectedPost,
+                        Title = "Review Post",
+                        AllowedPostStatus = new PostStatus[] { PostStatus.PendingApproval, PostStatus.Rejected },
+                        RedirectAction = "Rejected"
+                    });
+                }
+            }
+            return RedirectToAction("AccessDenied", "Home");
+        }
+
+
+        [Authorize(Roles = "Editor")]
+        [Route("[controller]/Pending/{Id}")]
+        public async Task<IActionResult> EditPendingPost(Guid id)
+        {
+            var pendingPost = await PostService.GetPostById(id);
+            if (pendingPost != null)
+            {
+                if (pendingPost.Status == PostStatus.PendingApproval)
+                {
+                    return View("EditPost", new EditPostViewModel
+                    {
+                        Post = pendingPost,
+                        Title = "Approve Post",
+                        AllowedPostStatus = new PostStatus[] { PostStatus.PendingApproval, PostStatus.Approved },
+                        RedirectAction = "Pending"
+                    });
+                }
+            }
+            return RedirectToAction("AccessDenied", "Home");
+        }
+
+        [HttpPost]
+        [Route("[controller]/Edit")]
+        public async Task<IActionResult> EditPost(EditPostViewModel postView)
+        {
+            await PostService.UpdatePost(postView.Post);
+            return RedirectToAction(postView.RedirectAction);
         }
     }
 }

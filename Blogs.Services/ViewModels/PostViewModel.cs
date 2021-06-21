@@ -10,11 +10,14 @@ namespace Blogs.Services.ViewModels
 
         public PostStatus Status { get; set; }
 
+        public int StatusId => (int)Status;
+
         [Required]
         [MaxLength(50)]
         public string Title { get; set; }
 
         [Required]
         public string Content { get; set; }
+        public Guid WriterId { get; set; }
     }
 }

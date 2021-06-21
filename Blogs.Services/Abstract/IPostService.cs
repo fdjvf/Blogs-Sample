@@ -11,7 +11,9 @@ namespace Blogs.Services.Abstract
     {
         Task<IEnumerable<SummaryPostViewModel>> GetPublicPosts();
         Task<IEnumerable<SummaryPostViewModel>> GetPendingPostsByUser(UserObject user);
-        Task<IEnumerable<SummaryPostViewModel>> GetPostsByWriterIdAndStatus(Guid writerId,PostStatus status);
+        Task<IEnumerable<SummaryPostViewModel>> GetPostsByWriterIdAndStatus(Guid writerId, PostStatus status);
+        Task<PostViewModel> GetPostById(Guid postId);
+
 
         /// <summary>
         /// Create new post
@@ -19,7 +21,7 @@ namespace Blogs.Services.Abstract
         /// <param name="postView"></param>
         /// <param name="writerId"></param>
         /// <returns></returns>
-        Task SavePost(PostViewModel postView,Guid writerId);
+        Task SavePost(PostViewModel postView, Guid writerId);
 
         /// <summary>
         /// Update an existing post

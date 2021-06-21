@@ -1,12 +1,20 @@
-﻿@model IEnumerable<SummaryPostViewModel>
+﻿@model (IEnumerable<SummaryPostViewModel> Posts, string EditAction)
 
-@foreach (var post in Model)
+@foreach (var post in Model.Posts)
 {
-    <div class="card">
+    <div class="card w-75">
         <div class="card-body">
-            <a href="#">
+            @if (User.IsWriter() && Model.EditAction == "Pending")
+            {
                 <h5 class="card-title">@post.Title</h5>
-            </a>
+            }
+            else
+            {
+                <a asp-controller="Posts" asp-action="@Model.EditAction" asp-route-Id="@post.Id">
+                    <h5 class="card-title">@post.Title</h5>
+                </a>
+            }
+
             <p class="card-text">@post.ShortDescription</p>
         </div>
         @if (post.PublishedOn.HasValue)

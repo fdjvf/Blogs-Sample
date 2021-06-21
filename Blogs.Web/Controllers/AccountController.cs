@@ -1,6 +1,5 @@
 ﻿using Blogs.Services.Abstract;
 using Blogs.Services.ViewModels;
-using Blogs.Web.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

@@ -63,9 +63,22 @@ namespace Blogs.Services
             await PostRepository.SavePost(postView.Content, postView.Title, writerId);
         }
 
-        public Task UpdatePost(PostViewModel postView)
+        public async Task UpdatePost(PostViewModel postView)
         {
-            throw new NotImplementedException();
+
+            var post = Mapper.Map<Post>(postView);
+            if (postView.Status == PostStatus.Approved)
+                post.ApprovalDate = DateTime.Now;
+
+            await PostRepository.UpdatePost(post);
+        }
+
+        public async Task<PostViewModel> GetPostById(Guid postId)
+        {
+            var post = await PostRepository.GetPostById(postId);
+            var result = Mapper.Map<PostViewModel>(post);
+
+            return result;
         }
     }
 }
