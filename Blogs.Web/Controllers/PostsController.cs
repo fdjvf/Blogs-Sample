@@ -157,7 +157,7 @@ namespace Blogs.Web.Controllers
                     {
                         Post = pendingPost,
                         Title = "Approve Post",
-                        AllowedPostStatus = new PostStatus[] { PostStatus.PendingApproval, PostStatus.Approved },
+                        AllowedPostStatus = new PostStatus[] { PostStatus.Rejected, PostStatus.Approved },
                         RedirectAction = "Pending"
                     });
                 }
