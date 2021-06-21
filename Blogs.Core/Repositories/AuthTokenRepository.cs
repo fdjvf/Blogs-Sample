@@ -12,11 +12,11 @@ namespace Blogs.Data.Repositories
 
         }
 
-        public async Task<AuthToken> GetAuthTokenByToken(string token)
+        public async Task<AuthToken> GetAuthTokenByTokenAsync(string token)
         {
             return await Db.AuthTokens
                 .Include(at => at.User)
-                .ThenInclude(at => at.Roles)
+                .ThenInclude(at => at.Roles)//We do this include, because later we need to validate the user's roles as well.
                 .FirstOrDefaultAsync(at => at.Token == token);
         }
     }

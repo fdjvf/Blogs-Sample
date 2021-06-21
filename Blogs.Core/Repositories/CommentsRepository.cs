@@ -15,21 +15,23 @@ namespace Blogs.Data.Repositories
 
         }
 
-        public async Task<IEnumerable<Comment>> GetCommentsByPostId(Guid postId)
+        public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(Guid postId)
         {
             var result = await Db.Comments.Include(comment => comment.Writer)
-                .Where(comment => comment.PostId == postId && !comment.IsDeleted).ToListAsync();
+                .Where(comment => comment.PostId == postId && !comment.IsDeleted)
+                .OrderByDescending(comment => comment.CreationDate)//Let's show most recent comments first
+                .ToListAsync();
             return result;
         }
 
-        public async Task SaveComment(Guid postId, string text, Guid? userId)
+        public async Task SaveCommentAsync(Guid postId, string text, Guid? userId)
         {
             var newComment = new Comment
             {
                 PostId = postId,
                 Text = text,
                 WriterId = userId,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.UtcNow
             };
 
             Db.Comments.Add(newComment);

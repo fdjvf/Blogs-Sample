@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Blogs.Data.Model
 {
+    /// <summary>
+    /// Users that can manage the posts and comments in the Blog. Used for Auth purposes as well.
+    /// </summary>
     public class User
     {
         public User()
@@ -10,6 +13,8 @@ namespace Blogs.Data.Model
             Roles = new HashSet<Role>();
             Comments = new HashSet<Comment>();
             Posts = new HashSet<Post>();
+            Tokens = new HashSet<AuthToken>();
+
         }
 
         public Guid Id { get; set; }

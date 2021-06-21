@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Blogs.Data.Model
 {
+    /// <summary>
+    /// Possible statuses a Post can have between submission and publication.
+    /// </summary>
     public partial class Status
     {
         public Status()

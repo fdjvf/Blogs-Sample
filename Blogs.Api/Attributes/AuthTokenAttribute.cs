@@ -42,7 +42,7 @@ namespace Blogs.Api.Attributes
             }
 
             var userIsEditor = tokenInfo.Roles.Contains("Editor");
-            var isExpired = DateTime.Now > tokenInfo.ExpirationDate;
+            var isExpired = DateTime.UtcNow > tokenInfo.ExpirationDate;
 
             string errorMessage = "";
 

@@ -19,7 +19,8 @@ namespace Blogs.Data.Repositories
         public async Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status)
         {
             var posts = await Db.Posts.Include(post => post.Writer)
-                .Where(post => post.StatusId == status && !post.IsDeleted).OrderBy(post => post.Title).ToListAsync();
+                .Where(post => post.StatusId == status && !post.IsDeleted)
+                .ToListAsync();
             return posts;
         }
 
@@ -36,7 +37,7 @@ namespace Blogs.Data.Repositories
                 Text = text,
                 WriterId = writerId,
                 StatusId = PostStatus.PendingApproval,
-                SubmitDate = DateTime.Now,
+                SubmitDate = DateTime.UtcNow,
                 Title = title
             };
             Db.Posts.Add(newPost);
@@ -70,7 +71,8 @@ namespace Blogs.Data.Repositories
 
         public async Task<Post> GetPostById(Guid postId)
         {
-            var post = await Db.Posts.Include(post => post.Writer).FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
+            var post = await Db.Posts.Include(post => post.Writer) //We need the writers information
+                .FirstOrDefaultAsync(post => post.Id == postId && !post.IsDeleted);
             return post;
         }
     }

@@ -6,31 +6,42 @@ using System.Threading.Tasks;
 
 namespace Blogs.Data.Abstract
 {
+    /// <summary>
+    /// Manages access to <see cref="Post"/> objects
+    ///</summary>
     public interface IPostRepository
     {
         /// <summary>
-        /// Get all posts by writer
+        /// Get all posts by using the writer's Id
         /// </summary>
         /// <param name="writerId"></param>
         /// <returns></returns>
         Task<IEnumerable<Post>> GetPostsByWriterId(Guid writerId);
 
         /// <summary>
-        /// Get posts by status
+        /// Get posts that are have a specific Status
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<Post>> GetPostsByStatus(PostStatus status);
 
         /// <summary>
-        /// Create new post
+        /// Get post by Id
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="writerId"></param>
+        /// <param name="postId"></param>
+        /// <returns></returns>
+        Task<Post> GetPostById(Guid postId);
+
+        /// <summary>
+        /// Creates new post
+        /// </summary>
+        /// <param name="text">Post content</param>
+        /// <param name="writerId">Writer's post</param>
+        /// <param name="title">Title of the post</param>
         /// <returns></returns>
         Task SavePost(string text, string title, Guid writerId);
 
         /// <summary>
-        /// Apply update to a post
+        /// Apply update to an existing post.
         /// </summary>
         /// <param name="updatedPost"></param>
         /// <returns></returns>
@@ -41,13 +52,6 @@ namespace Blogs.Data.Abstract
         /// </summary>
         /// <param name="postId"></param>
         /// <returns></returns>
-        Task SoftDeletePost(Guid postId);
-
-        /// <summary>
-        /// Get post by Id
-        /// </summary>
-        /// <param name="postId"></param>
-        /// <returns></returns>
-        Task<Post> GetPostById(Guid postId);
+        Task SoftDeletePost(Guid postId);        
     }
 }
