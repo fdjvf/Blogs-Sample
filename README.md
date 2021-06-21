@@ -13,7 +13,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#azure-sql-database-creation">Azure SQL Database Creation(Optional)</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -46,12 +46,11 @@ To get debug a local copy, follow these simple example steps.
 
 ### Prerequisites
 
-* [Visual Studio 2019 16.10.2]: (https://visualstudio.microsoft.com/downloads/)
-Make sure to mark the following workloads during installation:
-
-    *  **ASP.NET and Web Development**
-    *  **Azure Development**
-    *  **.Net Cross Platform Development**
+* [Visual Studio 2019 16.10.2](https://visualstudio.microsoft.com/downloads/) 
+    * Make sure to mark the following workloads during installation:
+        *  **ASP.NET and Web Development**
+        *  **Azure Development**
+        *  **.Net Cross Platform Development**
 
 ![image](https://user-images.githubusercontent.com/11657124/122759328-6c8f7880-d25f-11eb-91b0-8a223abd4e86.png)
 
@@ -59,22 +58,29 @@ Make sure to mark the following workloads during installation:
 
 * [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 * [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (Optional, a SQL Cloud instance can be used)
+* Azure Account (If you don't have one, [Click Here](https://azure.microsoft.com/en-us/free/))(Optional, a local SQL instance can be used)
 
-### Installation
+### Azure SQL Database Creation
+1. This an optional step, you can just create a database called **Blogs** in your local SQL Server Dev Edition, after having it installer in the previous step.
+2. Go to [Create Azure SQL Database](https://portal.azure.com/#create/Microsoft.SQLDatabase) to start the database creation
+![image](https://user-images.githubusercontent.com/11657124/122762450-f0972f80-d262-11eb-9bf4-62627a22dbef.png)
+3. Under the **Server** option, click **Create New** and typed the information required. Be sure to save the **login** and **password**, since you will use those later on.
+![image](https://user-images.githubusercontent.com/11657124/122763903-7cf62200-d264-11eb-8c18-ce55f5251378.png)
+4. Once that's done , review and create the database
+![image](https://user-images.githubusercontent.com/11657124/122764123-c34b8100-d264-11eb-8e69-e29b920a9e2e.png)
+![image](https://user-images.githubusercontent.com/11657124/122764175-cf374300-d264-11eb-8272-f204841fda7a.png)
+5. When deployment is finished, click on **Go to resource** and you will see your new Sql database
+![image](https://user-images.githubusercontent.com/11657124/122764718-600e1e80-d265-11eb-9381-490d77c17448.png)
+![image](https://user-images.githubusercontent.com/11657124/122764947-9ea3d900-d265-11eb-82b0-b36664467279.png)
+6. Click on **Show database connection strings**
+![image](https://user-images.githubusercontent.com/11657124/122765018-ad8a8b80-d265-11eb-95ed-2acc1ce18583.png)
+7. Copy the connection string from the ADO.NET Tab and add it your password and user. This will be the connection string that you will use in the App.
+8. Now go back to overview and click on **Set Server Firewall**
+![image](https://user-images.githubusercontent.com/11657124/122765463-2558b600-d266-11eb-825c-7106c654bf3e.png)
+9. This step is important , otherwise your application won't be able to communicate the database. Mark as yes the option "**Allow Azure services and resources to access this server**" and click on **Add Client API** to a add new IP rule name that includes your current public API (so that so can connect from your local computer). Then click on Save
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
+![image](https://user-images.githubusercontent.com/11657124/122765744-6cdf4200-d266-11eb-8d69-8632631d0398.png)
+10. That's it. You are ready to go.
 
 
 
