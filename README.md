@@ -80,42 +80,57 @@ To get debug a local copy, follow these simple example steps.
 1. This an optional step, you can just create a database called **Blogs** in your local SQL Server Dev Edition, after having it installer in the previous step.
 2. Go to [Create Azure SQL Database](https://portal.azure.com/#create/Microsoft.SQLDatabase) to start the database creation
 ![image](https://user-images.githubusercontent.com/11657124/122762450-f0972f80-d262-11eb-9bf4-62627a22dbef.png)
+
 3. Under the **Server** option, click **Create New** and typed the information required. Be sure to save the **login** and **password**, since you will use those later on.
 ![image](https://user-images.githubusercontent.com/11657124/122763903-7cf62200-d264-11eb-8c18-ce55f5251378.png)
+
 4. Once that's done , review and create the database
 ![image](https://user-images.githubusercontent.com/11657124/122764123-c34b8100-d264-11eb-8e69-e29b920a9e2e.png)
 ![image](https://user-images.githubusercontent.com/11657124/122764175-cf374300-d264-11eb-8272-f204841fda7a.png)
+
 5. When deployment is finished, click on **Go to resource** and you will see your new Sql database
 ![image](https://user-images.githubusercontent.com/11657124/122764718-600e1e80-d265-11eb-9381-490d77c17448.png)
 ![image](https://user-images.githubusercontent.com/11657124/122764947-9ea3d900-d265-11eb-82b0-b36664467279.png)
+
 6. Click on **Show database connection strings**
 ![image](https://user-images.githubusercontent.com/11657124/122765018-ad8a8b80-d265-11eb-95ed-2acc1ce18583.png)
+
 7. Copy the connection string from the ADO.NET Tab and add it your password and user. This will be the connection string that you will use in the App.
 8. Now go back to overview and click on **Set Server Firewall**
 ![image](https://user-images.githubusercontent.com/11657124/122765463-2558b600-d266-11eb-825c-7106c654bf3e.png)
+
 9. This step is important , otherwise your application won't be able to communicate the database. Mark as yes the option "**Allow Azure services and resources to access this server**" and click on **Add Client API** to a add new IP rule name that includes your current public API (so that so can connect from your local computer). Then click on Save
 
 ![image](https://user-images.githubusercontent.com/11657124/122765744-6cdf4200-d266-11eb-8d69-8632631d0398.png)
+
 10. That's it. You are ready to go.
 
 ### Code Setup
 1. Clone repository to your computer by going to the [repo link](https://github.com/fdjvf/BlogsAp) and clicking on option Code->Download Zip
 ![image](https://user-images.githubusercontent.com/11657124/122767614-75d11300-d268-11eb-9ee2-d8bdac3a1f3d.png)
+
 2. Unzip the code and open with Visual Studio the file called BlogsApp.sln
 ![image](https://user-images.githubusercontent.com/11657124/122768094-e24c1200-d268-11eb-857d-0c99f252363e.png)
+
 3. On Visual Studio, click on **Build Solution**
 ![image](https://user-images.githubusercontent.com/11657124/122768370-263f1700-d269-11eb-90d4-38151570c3ac.png)
+
 4. Now go to Blogs.API->appsettings.json and change the connection string value with the one from the previous step. Remember the database should be called Blogs
 ![image](https://user-images.githubusercontent.com/11657124/122769022-cd23b300-d269-11eb-9d66-bceb7c4fff23.png)
+
 5. Do the previous step also for Blogs.Web->appsettings.json
 6. Now Change the target project to Blogs.Web
 ![image](https://user-images.githubusercontent.com/11657124/122768523-4bcc2080-d269-11eb-8d99-741dc4314707.png)
+
 7. Now go to Tools->NuGet Package Manager->Package Manager Console .Make sure default project is Blogs.Web
 ![image](https://user-images.githubusercontent.com/11657124/122768721-7ddd8280-d269-11eb-8ee1-37f0961f076a.png)
+
 8. Type the command Update-Database .This will run the EF-Core Migrations and create all the neccessary tables and seed data.
 ![image](https://user-images.githubusercontent.com/11657124/122769255-08be7d00-d26a-11eb-94c0-b46f7f4ada7a.png)
+
 9. Now just run the app by clicking the **Play Button**
 ![image](https://user-images.githubusercontent.com/11657124/122769936-9c904900-d26a-11eb-8e45-c6fd33494bef.png)
+
 10. Voilà !
 ![image](https://user-images.githubusercontent.com/11657124/122770094-b9c51780-d26a-11eb-8688-effa53676df2.png)
 
@@ -124,7 +139,11 @@ To get debug a local copy, follow these simple example steps.
 ## Usage
 
 ### Web App
-Web App to view,
+
+Simple blog App to create and submit posts.
+
+To test the website use: <https://zemogablogs.azurewebsites.net>
+
 #### Credentials
 Use these to login:
 1. Writer 1
@@ -147,9 +166,15 @@ Use these to login:
 ![Anonymous User Blog](https://user-images.githubusercontent.com/11657124/122775239-8933ac80-d26f-11eb-976c-73ba5680f8fd.gif)
 
 ### REST API
-The API is Api Key Auth to validate who the user is and if it is an Editor or a Writer. Currently only **Editors** are able to use the API
+
+REST API to manage the posts as an Editor user. The API exposes two endpoints:
+* GetPendingPosts : Returns a list of the posts that are pending for approval
+* UpdatePostStatus : Receives the post identifier and a PostStatus (Approve or Reject) in order to update the Post.
+
+The API used API Key Auth to validate who the user is and if it is an Editor or a Writer. Currently only **Editors** are able to use the API
 
 #### Credentials
+
 To use the API with POSTMAN , create a new request and add a new Header with Key called **AuthToken** and in the value use the following tokens:
 ![image](https://user-images.githubusercontent.com/11657124/122782334-41645380-d276-11eb-84f6-9bd1473f46a2.png)
 
@@ -161,12 +186,22 @@ Auth Tokens for REST API:
 
 #### API Demo
 
-##### Auth Demo/Get Pending Posts
+To test the API use this URL : <https://zemogablogsapi.azurewebsites.net>
+
+##### Auth Demo/GetPendingPosts
+
+Sample URL: <https://zemogablogsapi.azurewebsites.net/Posts/GetPendingPosts>
 
 ![Auth Sample-GetPendingPosts](https://user-images.githubusercontent.com/11657124/122783629-57264880-d277-11eb-967e-ff45ac4b7d10.gif)
 
-##### Update Post Status
+##### UpdatePostStatus
 
+Sample URL: <https://zemogablogsapi.azurewebsites.net/Posts/UpdatePostStatus/{PostGuid}?postStatus={newStatus}>
+
+Parameters:
+* {PostGuid}: Id of the Post to update. It can be obtained from the previous endpoint result.
+* {newStatus}: The new status of the post. Available values are **Approved** or **Rejected**
+    
 ![Update Pending Post](https://user-images.githubusercontent.com/11657124/122784217-e4699d00-d277-11eb-9eb7-3fdaf8f7bd9a.gif)
 
 
