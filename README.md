@@ -58,7 +58,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get debug a local copy, follow these simple example steps.
+To debug a local copy of the project, follow these simple example steps.
 
 ### Prerequisites
 * [Postman](https://www.postman.com/downloads/)
