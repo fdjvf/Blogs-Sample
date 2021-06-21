@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace Blogs.Web.Controllers
 {
-    [Authorize]
+    /// <summary>
+    /// Controller used for Authentication purposes
+    /// </summary>
     public class AccountController : Controller
     {
         private IUserService UserService { get; }
@@ -17,6 +19,10 @@ namespace Blogs.Web.Controllers
             UserService = userService;
         }
 
+        /// <summary>
+        /// Return the Login page for unauthenticated users
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Login()
         {
@@ -26,6 +32,10 @@ namespace Blogs.Web.Controllers
             return View(new LoginViewModel());
         }
 
+        /// <summary>
+        /// Action user to valited the Login information and Signing in the user
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel loginInfo)
@@ -45,6 +55,11 @@ namespace Blogs.Web.Controllers
 
         }
 
+        /// <summary>
+        /// Logout action. Only available for Authenticated users
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();

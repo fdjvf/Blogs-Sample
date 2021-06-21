@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Blogs.Web.Controllers
 {
+    /// <summary>
+    /// Controller that manages all the Post interactions. Most of the actions
+    /// here required the user to be authenticated
+    /// </summary>
     [Authorize]
     public class PostsController : Controller
     {
@@ -18,6 +22,12 @@ namespace Blogs.Web.Controllers
             PostService = postService;
         }
 
+        /// <summary>
+        /// Returns a detailed view of a post. 
+        /// Any user can see detailed approved posts
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("[controller]/Detailed/{Id}")]
         public async Task<IActionResult> GetPost(Guid id)
@@ -34,6 +44,12 @@ namespace Blogs.Web.Controllers
             return RedirectToAction("AccessDenied", "Home");
         }
 
+        /// <summary>
+        /// Gets all the posts created by the current Writer Users and that
+        /// also have been approved by an Editor
+        /// Only for Writers
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Writer")]
         [Route("[controller]/Approved")]
         public async Task<IActionResult> ApprovedPosts()
@@ -42,6 +58,12 @@ namespace Blogs.Web.Controllers
             return View(myPosts);
         }
 
+        /// <summary>
+        /// Gets all the posts created by the current Writer Users and that
+        /// also have been rejected by an Editor
+        /// Only for Writers
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Writer")]
         [Route("[controller]/Rejected")]
         public async Task<IActionResult> RejectedPosts()
@@ -50,7 +72,12 @@ namespace Blogs.Web.Controllers
             return View(myPosts);
         }
 
-        [Authorize]
+        /// <summary>
+        /// If the user is an Editor, it will return all pendind posts
+        /// otherwise, it will return all pending posts wrote by the current user.
+        /// Only for Writers/Editors
+        /// </summary>
+        /// <returns></returns>
         [Route("[controller]/Pending")]
         public async Task<IActionResult> PendingPosts()
         {
@@ -58,8 +85,10 @@ namespace Blogs.Web.Controllers
             return View(pendingPosts);
         }
 
-
-
+        /// <summary>
+        /// Returns a form to create a new post 
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Writer")]
         [Route("[controller]/Add")]
         public IActionResult CreatePost()
@@ -67,6 +96,12 @@ namespace Blogs.Web.Controllers
             return View("AddPost");
         }
 
+        /// <summary>
+        /// Creates a new post written by the current user
+        /// Only writers can create posts
+        /// </summary>
+        /// <param name="postView"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Writer")]
         [Route("[controller]/Add")]
@@ -76,7 +111,12 @@ namespace Blogs.Web.Controllers
             return RedirectToAction("Pending");
         }
 
-
+        /// <summary>
+        /// Returns a view to edit rejected posts
+        /// Only for Writers
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Writer")]
         [Route("[controller]/Rejected/{Id}")]
         public async Task<IActionResult> EditRejectedPost(Guid id)
@@ -98,7 +138,12 @@ namespace Blogs.Web.Controllers
             return RedirectToAction("AccessDenied", "Home");
         }
 
-
+        // <summary>
+        /// Returns a view to approve/reject pending posts
+        /// Only for Editors
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Editor")]
         [Route("[controller]/Pending/{Id}")]
         public async Task<IActionResult> EditPendingPost(Guid id)
@@ -120,6 +165,11 @@ namespace Blogs.Web.Controllers
             return RedirectToAction("AccessDenied", "Home");
         }
 
+        /// <summary>
+        /// Edits a post
+        /// </summary>
+        /// <param name="postView"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[controller]/Edit")]
         public async Task<IActionResult> EditPost(EditPostViewModel postView)

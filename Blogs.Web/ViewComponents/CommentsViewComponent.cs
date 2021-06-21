@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Blogs.Web.ViewComponents
 {
+    /// <summary>
+    /// View Component used to show a list of comments related to a post
+    /// </summary>
     public class CommentsViewComponent : ViewComponent
     {
         private ICommentsService CommentsService { get; }

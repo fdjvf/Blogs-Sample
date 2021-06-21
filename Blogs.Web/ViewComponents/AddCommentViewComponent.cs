@@ -4,6 +4,9 @@ using Blogs.Services.Utilities;
 
 namespace Blogs.Web.ViewComponents
 {
+    /// <summary>
+    /// View Component used to show a form for adding new comments to a Post
+    /// </summary>
     public class AddCommentViewComponent : ViewComponent
     {
         public AddCommentViewComponent()

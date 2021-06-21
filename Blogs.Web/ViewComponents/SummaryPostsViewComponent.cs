@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Blogs.Web.ViewComponents
 {
+    /// <summary>
+    /// View component used to shows a summary of post
+    /// </summary>
     public class SummaryPostsViewComponent : ViewComponent
     {
         public SummaryPostsViewComponent()
