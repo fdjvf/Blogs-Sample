@@ -106,10 +106,11 @@ To debug a local copy of the project, follow these simple example steps.
 10. That's it. You are ready to go.
 
 ### Code Setup
-1. Clone repository to your computer by going to the [repo link](https://github.com/fdjvf/BlogsAp) and clicking on **Code->Download Zip**
-![image](https://user-images.githubusercontent.com/11657124/122767614-75d11300-d268-11eb-9ee2-d8bdac3a1f3d.png)
+1. Clone repository to your computer by going to the [repo link](https://gitlab.com/fdjvf/BlogsApp/-/tree/master) and clicking on **Download Source Code**
+![image](https://user-images.githubusercontent.com/11657124/122815353-f6106c00-d29a-11eb-875f-0049bc24efd8.png)
 
 2. Unzip the code and open with Visual Studio the file called BlogsApp.sln
+
 ![image](https://user-images.githubusercontent.com/11657124/122768094-e24c1200-d268-11eb-857d-0c99f252363e.png)
 
 3. On Visual Studio, click on **Build Solution**
